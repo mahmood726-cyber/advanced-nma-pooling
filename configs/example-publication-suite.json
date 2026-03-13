@@ -1,0 +1,50 @@
+{
+  "thresholds": {
+    "coverage_lo": 0.93,
+    "coverage_hi": 0.97,
+    "bias_improvement_min": 0.2,
+    "logscore_win_rate_min": 0.8,
+    "continuous_logscore_win_rate_min": 0.7,
+    "continuous_logscore_delta_ci95_lb_min": 0.0,
+    "continuous_logscore_sign_p_max": 0.05,
+    "continuous_logscore_signed_rank_p_max": 0.05,
+    "continuous_superiority_probability_min": 0.95,
+    "continuous_logscore_permutation_p_max": 0.05,
+    "continuous_logscore_permutation_mcse_max": 0.01,
+    "continuous_superiority_probability_mcse_max": 0.01,
+    "survival_logscore_delta_ci95_lb_min": 0.0,
+    "survival_logscore_sign_p_max": 0.05,
+    "survival_logscore_signed_rank_p_max": 0.05,
+    "survival_superiority_probability_min": 0.95,
+    "survival_logscore_permutation_p_max": 0.05,
+    "survival_logscore_permutation_mcse_max": 0.01,
+    "survival_superiority_probability_mcse_max": 0.01,
+    "familywise_holm_alpha": 0.10
+  },
+  "require_git_commit": false,
+  "continuity_correction": 0.5,
+  "continuous": {
+    "n_networks": 120,
+    "seed_start": 1000,
+    "n_per_arm": 120,
+    "se": 0.25,
+    "noise_sd": 0.25,
+    "study_heterogeneity_sd": 0.0,
+    "selection_mode": "pre_specified",
+    "candidate_model": "core_fixed_effects",
+    "baseline_model": "core_random_effects",
+    "bootstrap_draws": 2500,
+    "permutation_draws": 20000,
+    "permutation_exact_max_pairs": 20
+  },
+  "survival_nonph": {
+    "n_networks": 100,
+    "seed_start": 2000,
+    "n_per_arm": 650,
+    "replicates_per_pair": 2,
+    "follow_up_fraction": 0.85,
+    "bootstrap_draws": 2500,
+    "permutation_draws": 20000,
+    "permutation_exact_max_pairs": 20
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "analysis": {
+    "outcome_id": "os",
+    "reference_treatment": "A",
+    "random_effects": false,
+    "continuity_correction": 0.5
+  },
+  "data": {
+    "studies": [
+      {
+        "study_id": "SAB",
+        "design": "rct",
+        "year": 2025,
+        "source_id": "sim-ab",
+        "rob_domain_summary": "low"
+      },
+      {
+        "study_id": "SAC",
+        "design": "rct",
+        "year": 2025,
+        "source_id": "sim-ac",
+        "rob_domain_summary": "low"
+      },
+      {
+        "study_id": "SBC",
+        "design": "rct",
+        "year": 2025,
+        "source_id": "sim-bc",
+        "rob_domain_summary": "low"
+      }
+    ],
+    "arms": [
+      {
+        "study_id": "SAB",
+        "arm_id": "SAB_A1",
+        "treatment_id": "A",
+        "n": 150
+      },
+      {
+        "study_id": "SAB",
+        "arm_id": "SAB_A2",
+        "treatment_id": "B",
+        "n": 150
+      },
+      {
+        "study_id": "SAC",
+        "arm_id": "SAC_A1",
+        "treatment_id": "A",
+        "n": 150
+      },
+      {
+        "study_id": "SAC",
+        "arm_id": "SAC_A2",
+        "treatment_id": "C",
+        "n": 150
+      },
+      {
+        "study_id": "SBC",
+        "arm_id": "SBC_A1",
+        "treatment_id": "B",
+        "n": 150
+      },
+      {
+        "study_id": "SBC",
+        "arm_id": "SBC_A2",
+        "treatment_id": "C",
+        "n": 150
+      }
+    ],
+    "survival_ad": [
+      {
+        "study_id": "SAB",
+        "arm_id": "SAB_A1",
+        "outcome_id": "os",
+        "interval_id": "I1",
+        "t_start": 0.0,
+        "t_end": 3.0,
+        "events": 18,
+        "person_time": 300.0
+      },
+      {
+        "study_id": "SAB",
+        "arm_id": "SAB_A2",
+        "outcome_id": "os",
+        "interval_id": "I1",
+        "t_start": 0.0,
+        "t_end": 3.0,
+        "events": 13,
+        "person_time": 300.0
+      },
+      {
+        "study_id": "SAC",
+        "arm_id": "SAC_A1",
+        "outcome_id": "os",
+        "interval_id": "I1",
+        "t_start": 0.0,
+        "t_end": 3.0,
+        "events": 18,
+        "person_time": 300.0
+      },
+      {
+        "study_id": "SAC",
+        "arm_id": "SAC_A2",
+        "outcome_id": "os",
+        "interval_id": "I1",
+        "t_start": 0.0,
+        "t_end": 3.0,
+        "events": 10,
+        "person_time": 300.0
+      },
+      {
+        "study_id": "SBC",
+        "arm_id": "SBC_A1",
+        "outcome_id": "os",
+        "interval_id": "I1",
+        "t_start": 0.0,
+        "t_end": 3.0,
+        "events": 13,
+        "person_time": 300.0
+      },
+      {
+        "study_id": "SBC",
+        "arm_id": "SBC_A2",
+        "outcome_id": "os",
+        "interval_id": "I1",
+        "t_start": 0.0,
+        "t_end": 3.0,
+        "events": 10,
+        "person_time": 300.0
+      },
+      {
+        "study_id": "SAB",
+        "arm_id": "SAB_A1",
+        "outcome_id": "os",
+        "interval_id": "I2",
+        "t_start": 3.0,
+        "t_end": 6.0,
+        "events": 15,
+        "person_time": 300.0
+      },
+      {
+        "study_id": "SAB",
+        "arm_id": "SAB_A2",
+        "outcome_id": "os",
+        "interval_id": "I2",
+        "t_start": 3.0,
+        "t_end": 6.0,
+        "events": 13,
+        "person_time": 300.0
+      },
+      {
+        "study_id": "SAC",
+        "arm_id": "SAC_A1",
+        "outcome_id": "os",
+        "interval_id": "I2",
+        "t_start": 3.0,
+        "t_end": 6.0,
+        "events": 15,
+        "person_time": 300.0
+      },
+      {
+        "study_id": "SAC",
+        "arm_id": "SAC_A2",
+        "outcome_id": "os",
+        "interval_id": "I2",
+        "t_start": 3.0,
+        "t_end": 6.0,
+        "events": 11,
+        "person_time": 300.0
+      },
+      {
+        "study_id": "SBC",
+        "arm_id": "SBC_A1",
+        "outcome_id": "os",
+        "interval_id": "I2",
+        "t_start": 3.0,
+        "t_end": 6.0,
+        "events": 13,
+        "person_time": 300.0
+      },
+      {
+        "study_id": "SBC",
+        "arm_id": "SBC_A2",
+        "outcome_id": "os",
+        "interval_id": "I2",
+        "t_start": 3.0,
+        "t_end": 6.0,
+        "events": 11,
+        "person_time": 300.0
+      },
+      {
+        "study_id": "SAB",
+        "arm_id": "SAB_A1",
+        "outcome_id": "os",
+        "interval_id": "I3",
+        "t_start": 6.0,
+        "t_end": 12.0,
+        "events": 12,
+        "person_time": 600.0
+      },
+      {
+        "study_id": "SAB",
+        "arm_id": "SAB_A2",
+        "outcome_id": "os",
+        "interval_id": "I3",
+        "t_start": 6.0,
+        "t_end": 12.0,
+        "events": 13,
+        "person_time": 600.0
+      },
+      {
+        "study_id": "SAC",
+        "arm_id": "SAC_A1",
+        "outcome_id": "os",
+        "interval_id": "I3",
+        "t_start": 6.0,
+        "t_end": 12.0,
+        "events": 12,
+        "person_time": 600.0
+      },
+      {
+        "study_id": "SAC",
+        "arm_id": "SAC_A2",
+        "outcome_id": "os",
+        "interval_id": "I3",
+        "t_start": 6.0,
+        "t_end": 12.0,
+        "events": 11,
+        "person_time": 600.0
+      },
+      {
+        "study_id": "SBC",
+        "arm_id": "SBC_A1",
+        "outcome_id": "os",
+        "interval_id": "I3",
+        "t_start": 6.0,
+        "t_end": 12.0,
+        "events": 13,
+        "person_time": 600.0
+      },
+      {
+        "study_id": "SBC",
+        "arm_id": "SBC_A2",
+        "outcome_id": "os",
+        "interval_id": "I3",
+        "t_start": 6.0,
+        "t_end": 12.0,
+        "events": 11,
+        "person_time": 600.0
+      }
+    ]
+  }
+}

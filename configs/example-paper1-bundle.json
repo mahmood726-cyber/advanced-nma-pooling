@@ -1,0 +1,23 @@
+{
+  "bundle": {
+    "name": "paper1-rsm-bundle-v1",
+    "run_publication_suite": true,
+    "run_bias_adjusted": true,
+    "run_bias_adjusted_bayesian": true,
+    "run_bias_sensitivity": true
+  },
+  "paths": {
+    "publication_config": "configs/example-publication-suite.json",
+    "bias_adjusted_config": "configs/example-bias-adjusted.json",
+    "bias_adjusted_bayesian_config": "configs/example-bias-adjusted-bayesian.json",
+    "bias_sensitivity_config": "configs/example-bias-sensitivity.json"
+  },
+  "docs": {
+    "copy": [
+      "docs/methods/paper1-protocol.md",
+      "docs/validation/paper1-simulation-registry.md",
+      "docs/methods/paper1-manuscript-outline.md",
+      "docs/methods/research-synthesis-methods-readiness.md"
+    ]
+  }
+}

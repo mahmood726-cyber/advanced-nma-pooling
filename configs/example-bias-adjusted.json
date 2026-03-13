@@ -1,0 +1,158 @@
+{
+  "analysis": {
+    "outcome_id": "efficacy",
+    "measure_type": "continuous",
+    "reference_treatment": "A",
+    "random_effects": false,
+    "reference_design": "rct",
+    "bias_prior_sd": 1.0
+  },
+  "data": {
+    "studies": [
+      {
+        "study_id": "R1",
+        "design": "rct",
+        "year": 2021,
+        "source_id": "src-r1",
+        "rob_domain_summary": "low"
+      },
+      {
+        "study_id": "R2",
+        "design": "rct",
+        "year": 2021,
+        "source_id": "src-r2",
+        "rob_domain_summary": "low"
+      },
+      {
+        "study_id": "N1",
+        "design": "nrs",
+        "year": 2022,
+        "source_id": "src-n1",
+        "rob_domain_summary": "high"
+      },
+      {
+        "study_id": "N2",
+        "design": "nrs",
+        "year": 2022,
+        "source_id": "src-n2",
+        "rob_domain_summary": "high"
+      }
+    ],
+    "arms": [
+      {
+        "study_id": "R1",
+        "arm_id": "R1A",
+        "treatment_id": "A",
+        "n": 120
+      },
+      {
+        "study_id": "R1",
+        "arm_id": "R1B",
+        "treatment_id": "B",
+        "n": 120
+      },
+      {
+        "study_id": "R2",
+        "arm_id": "R2A",
+        "treatment_id": "A",
+        "n": 120
+      },
+      {
+        "study_id": "R2",
+        "arm_id": "R2C",
+        "treatment_id": "C",
+        "n": 120
+      },
+      {
+        "study_id": "N1",
+        "arm_id": "N1A",
+        "treatment_id": "A",
+        "n": 120
+      },
+      {
+        "study_id": "N1",
+        "arm_id": "N1B",
+        "treatment_id": "B",
+        "n": 120
+      },
+      {
+        "study_id": "N2",
+        "arm_id": "N2A",
+        "treatment_id": "A",
+        "n": 120
+      },
+      {
+        "study_id": "N2",
+        "arm_id": "N2C",
+        "treatment_id": "C",
+        "n": 120
+      }
+    ],
+    "outcomes_ad": [
+      {
+        "study_id": "R1",
+        "arm_id": "R1A",
+        "outcome_id": "efficacy",
+        "measure_type": "continuous",
+        "value": 0.0,
+        "se": 0.18
+      },
+      {
+        "study_id": "R1",
+        "arm_id": "R1B",
+        "outcome_id": "efficacy",
+        "measure_type": "continuous",
+        "value": 1.0,
+        "se": 0.18
+      },
+      {
+        "study_id": "R2",
+        "arm_id": "R2A",
+        "outcome_id": "efficacy",
+        "measure_type": "continuous",
+        "value": 0.0,
+        "se": 0.18
+      },
+      {
+        "study_id": "R2",
+        "arm_id": "R2C",
+        "outcome_id": "efficacy",
+        "measure_type": "continuous",
+        "value": 2.0,
+        "se": 0.18
+      },
+      {
+        "study_id": "N1",
+        "arm_id": "N1A",
+        "outcome_id": "efficacy",
+        "measure_type": "continuous",
+        "value": 0.0,
+        "se": 0.18
+      },
+      {
+        "study_id": "N1",
+        "arm_id": "N1B",
+        "outcome_id": "efficacy",
+        "measure_type": "continuous",
+        "value": 1.6,
+        "se": 0.18
+      },
+      {
+        "study_id": "N2",
+        "arm_id": "N2A",
+        "outcome_id": "efficacy",
+        "measure_type": "continuous",
+        "value": 0.0,
+        "se": 0.18
+      },
+      {
+        "study_id": "N2",
+        "arm_id": "N2C",
+        "outcome_id": "efficacy",
+        "measure_type": "continuous",
+        "value": 2.6,
+        "se": 0.18
+      }
+    ]
+  }
+}
