@@ -10,7 +10,7 @@ Package: `C:\Models\advanced-nma-pooling`
 - [x] Implemented package scope is distinguished from the narrower set of workflows quantitatively evidenced in the manuscript.
 - [x] Public repository URL is present in the manuscript: `https://github.com/mahmood726-cyber/advanced-nma-pooling`
 - [x] Public release URL is present in the manuscript: `https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/v0.1.1`
-- [x] Public GitHub submission snapshot is identified in the manuscript: `https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/f1000-submission-2026-03-14`
+- [x] Public GitHub submission snapshot is identified in the manuscript: `https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/f1000-submission-2026-03-14-final`
 - [x] README, CHANGELOG, LICENSE, release manifest, and release checksums are present in the repository.
 - [x] Reproducibility, testing, and validation evidence sections are present.
 - [x] Example generated result files named explicitly in the manuscript:
@@ -23,14 +23,17 @@ Package: `C:\Models\advanced-nma-pooling`
   - `f1000_artifacts/validation_summary.md`
   - `f1000_artifacts/tutorial_walkthrough.md`
   - `f1000_artifacts/flowchart_blueprint.md`
+  - `f1000_artifacts/Figure_1_reproducibility_workflow.svg`
+  - `f1000_artifacts/figure_captions.md`
 - [x] Comparator framing is moderated; claims do not assert blanket superiority over existing software.
 - [x] Limitations section explicitly states current manuscript boundaries, including ML-NMR evidence gap, benchmark evidence gap, and pending artifact archiving.
 - [x] Reviewer-facing walkthrough paths are present for publication-suite and paper-bundle workflows.
 - [x] Methods now define key publication-suite endpoints and locked scenario settings.
 - [ ] Public DOI-backed archive for source release is still pending.
 - [ ] DOI-backed archive for the exact manuscript-result artifacts is still pending.
-- [ ] Final figure assets and captions are still not aligned to a finished submission package.
+- [x] Final figure assets and captions are aligned to the current manuscript package.
 - [x] DOCX outputs regenerated from the revised markdown files.
+- [x] Final grammar and broken-link pass completed on the current GitHub submission snapshot.
 
 ## Real-review themes explicitly addressed
 - [x] Avoided a skeleton manuscript structure.
@@ -44,5 +47,4 @@ Package: `C:\Models\advanced-nma-pooling`
 ## Remaining actions before external submission
 1. Create the Zenodo archive for the public submission snapshot and replace the DOI placeholder.
 2. Ensure the Zenodo record covers both the source snapshot and the exact manuscript-result artifacts already exposed on GitHub.
-3. Align final figure files and captions with the revised manuscript text.
-4. Run a last grammar, broken-link, and formatting pass on the markdown and DOCX outputs.
+3. Replace the DOI placeholder and perform a final submission-format check after Zenodo assigns the archive record.

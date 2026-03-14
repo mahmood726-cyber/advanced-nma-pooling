@@ -11,8 +11,14 @@ Config and schema validation -> workflow selection -> model execution -> predict
 
 - Publication validation summary: `f1000_artifacts/validation_summary.md`
 - Reviewer walkthrough: `f1000_artifacts/tutorial_walkthrough.md`
+- Final vector figure asset: `f1000_artifacts/Figure_1_reproducibility_workflow.svg`
+- Final caption file: `f1000_artifacts/figure_captions.md`
 - Publication-suite outputs: `artifacts/publication-suite.json`, `artifacts/publication-summary.md`
 - Paper-bundle outputs: `artifacts/paper1-bundle/manifest.json`, `artifacts/paper1-bundle/paper1-executive-summary.md`
+
+## Snapshot reference
+
+- Public GitHub submission snapshot: `f1000-submission-2026-03-14-final`
 
 ## Design notes
 

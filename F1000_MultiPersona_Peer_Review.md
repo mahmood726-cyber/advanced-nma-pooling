@@ -6,13 +6,13 @@ Calibration source: `C:\Users\user\OneDrive - NHS\Desktop\reviewer Report.txt`
 
 ## Overall decision
 
-Moderate revision before external submission. The package is now materially stronger than the real-world failure cases in the reviewer report: the manuscript no longer reads like a skeleton outline, the reviewer-facing support files are aligned, and the exact manuscript-result files are prepared for exposure in a public GitHub submission snapshot. The remaining blockers are now concentrated in archival packaging, final submission assets, and a few medium-severity framing issues.
+Moderate revision before external submission. The package is now materially stronger than the real-world failure cases in the reviewer report: the manuscript no longer reads like a skeleton outline, the reviewer-facing support files are aligned, the figure package is aligned, and the exact manuscript-result files are prepared for exposure in a public GitHub submission snapshot. The remaining blockers are now concentrated in archival packaging and a few medium-severity framing issues.
 
 ## Findings
 
 ### 1. High - DOI-backed archival is still pending even after the GitHub submission snapshot is prepared
 **Personas:** Reproducibility, Editorial  
-**References:** `F1000_Software_Tool_Article.md` lines 92, 149-151; `F1000_Submission_Checklist_RealReview.md` lines 30-31
+**References:** `F1000_Software_Tool_Article.md` lines 94, 151-154; `F1000_Submission_Checklist_RealReview.md` lines 32-33
 
 The strongest provenance problem is now narrower than before. The manuscript package can point readers to a public GitHub submission snapshot containing the revised paper materials and exact result files, but the DOI-backed archival step required for final software-tool submission is still pending.
 
@@ -34,17 +34,17 @@ The package now offers a much better reviewer-facing walkthrough, and that is di
 
 **Needed fix:** Add a concise applied use case, or continue to frame the article as a reproducibility-and-validation paper rather than a general end-user case-study article.
 
-### 4. Medium - Final figure/caption alignment and Zenodo-ready packaging are still outside the repo changes completed here
+### 4. Medium - The paper is now structurally aligned, but the archive-facing handoff still depends on Zenodo rather than the repo alone
 **Personas:** Editorial, Reproducibility  
-**References:** `F1000_Submission_Checklist_RealReview.md` lines 32, 45-47
+**References:** `F1000_Submission_Checklist_RealReview.md` lines 32-36, 48-50
 
-The article package is substantially cleaner, but the final figure set and caption alignment are still flagged as unfinished in the checklist. That means the package is closer to submission-ready than before, but not completely at the handoff standard expected for external upload.
+The article package is now substantially cleaner, with the figure asset/caption package and the final grammar/broken-link pass reflected in the checklist. The remaining problem is external archival completion rather than a repo-side packaging gap.
 
-**Needed fix:** Align figure assets and captions to the final manuscript and archive them with the Zenodo snapshot.
+**Needed fix:** Complete the Zenodo archive and replace the DOI placeholder throughout the submission package.
 
 ### 5. Medium - The specialist metrics are defined better, but some practical interpretation burden remains on the reader
 **Personas:** Methods, Editorial  
-**References:** `F1000_Software_Tool_Article.md` lines 98, 113, 119
+**References:** `F1000_Software_Tool_Article.md` lines 100, 115, 121
 
 The manuscript now defines the publication-suite endpoints and gives a plain-language interpretation of the `nrs` bias term and prior-sensitivity spans. That is a clear improvement. Even so, the core validation story still depends on specialist metrics such as log-score deltas, superiority probabilities, and internal gate thresholds, so non-methods readers may still need more interpretive guidance than the paper currently provides.
 
@@ -61,7 +61,7 @@ The manuscript now defines the publication-suite endpoints and gives a plain-lan
 - Bottom line: this is now mainly an archival/provenance problem rather than a documentation failure.
 
 ### Editorial reviewer
-- Strongest remaining concern: the package still needs final figure/caption alignment and DOI-backed archival.
+- Strongest remaining concern: the package still needs DOI-backed archival.
 - Bottom line: the draft is structurally sound, but it should not be sent externally until the provenance and snapshot issues are resolved.
 
 ## Positive notes
@@ -76,4 +76,4 @@ The manuscript now defines the publication-suite endpoints and gives a plain-lan
 
 Internal decision: moderate revision before submission.
 
-If the Zenodo archive and final figure package are completed, the remaining concerns are mostly framing refinements rather than hard blockers. The project now has a credible software-tool manuscript core and a publishable GitHub submission snapshot; the remaining work is primarily external packaging.
+If the Zenodo archive is completed, the remaining concerns are mostly framing refinements rather than hard blockers. The project now has a credible software-tool manuscript core and a publishable GitHub submission snapshot; the remaining work is primarily external packaging.

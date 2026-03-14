@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 1. Reproducibility-oriented workflow for Advanced NMA Pooling</title>
+  <desc id="desc">A left-to-right workflow showing schema validation, workflow selection, model execution, diagnostics or sensitivity evaluation, manuscript-facing summaries and manifests, and release provenance.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f4ec; }
+      .title { font: 700 34px 'Georgia', 'Times New Roman', serif; fill: #17324d; }
+      .subtitle { font: 400 18px 'Georgia', 'Times New Roman', serif; fill: #36536b; }
+      .box { fill: #fffdf8; stroke: #17324d; stroke-width: 3; rx: 18; ry: 18; }
+      .boxAlt { fill: #f1efe6; stroke: #36536b; stroke-width: 3; rx: 18; ry: 18; }
+      .label { font: 700 22px 'Arial', sans-serif; fill: #17324d; }
+      .body { font: 400 18px 'Arial', sans-serif; fill: #23384b; }
+      .arrow { stroke: #8b5e34; stroke-width: 6; fill: none; marker-end: url(#arrowHead); }
+    </style>
+    <marker id="arrowHead" markerWidth="14" markerHeight="10" refX="12" refY="5" orient="auto">
+      <polygon points="0,0 14,5 0,10" fill="#8b5e34" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1600" height="900" />
+
+  <text class="title" x="80" y="90">Figure 1. Reproducibility-oriented workflow for the manuscript-facing validation path</text>
+  <text class="subtitle" x="80" y="126">Advanced NMA Pooling integrates schema validation, workflow execution, reviewer-facing outputs, and release provenance in one auditable pipeline.</text>
+
+  <rect class="box" x="80" y="220" width="220" height="170" />
+  <text class="label" x="110" y="265">1. Config and schema</text>
+  <text class="label" x="110" y="292">validation</text>
+  <text class="body" x="110" y="330">Studies, arms, outcomes,</text>
+  <text class="body" x="110" y="356">survival fields, and</text>
+  <text class="body" x="110" y="382">model settings are checked</text>
+
+  <rect class="boxAlt" x="360" y="220" width="220" height="170" />
+  <text class="label" x="392" y="265">2. Workflow</text>
+  <text class="label" x="392" y="292">selection</text>
+  <text class="body" x="392" y="330">Analysis, publication</text>
+  <text class="body" x="392" y="356">suite, paper bundle,</text>
+  <text class="body" x="392" y="382">or sensitivity path</text>
+
+  <rect class="box" x="640" y="220" width="220" height="170" />
+  <text class="label" x="673" y="265">3. Model</text>
+  <text class="label" x="673" y="292">execution</text>
+  <text class="body" x="673" y="330">Aggregate NMA, bias</text>
+  <text class="body" x="673" y="356">adjustment, survival</text>
+  <text class="body" x="673" y="382">non-PH, or bundle steps</text>
+
+  <rect class="boxAlt" x="920" y="160" width="250" height="170" />
+  <text class="label" x="952" y="205">4a. Predictive</text>
+  <text class="label" x="952" y="232">diagnostics</text>
+  <text class="body" x="952" y="270">Coverage, log-score</text>
+  <text class="body" x="952" y="296">delta, superiority,</text>
+  <text class="body" x="952" y="322">gate status</text>
+
+  <rect class="boxAlt" x="920" y="390" width="250" height="170" />
+  <text class="label" x="952" y="435">4b. Bias and</text>
+  <text class="label" x="952" y="462">sensitivity</text>
+  <text class="body" x="952" y="500">Design offsets, backend</text>
+  <text class="body" x="952" y="526">comparisons, prior spans</text>
+
+  <rect class="box" x="1230" y="160" width="280" height="170" />
+  <text class="label" x="1262" y="205">5. Manuscript-facing</text>
+  <text class="label" x="1262" y="232">summaries and manifests</text>
+  <text class="body" x="1262" y="270">Markdown summaries,</text>
+  <text class="body" x="1262" y="296">JSON outputs, copied docs,</text>
+  <text class="body" x="1262" y="322">bundle inventory</text>
+
+  <rect class="box" x="1230" y="390" width="280" height="170" />
+  <text class="label" x="1262" y="435">6. Release provenance</text>
+  <text class="body" x="1262" y="473">SHA256 sums, release</text>
+  <text class="body" x="1262" y="499">manifest, git snapshot,</text>
+  <text class="body" x="1262" y="525">submission-ready package</text>
+
+  <path class="arrow" d="M300 305 L360 305" />
+  <path class="arrow" d="M580 305 L640 305" />
+  <path class="arrow" d="M860 305 L920 245" />
+  <path class="arrow" d="M860 305 L920 475" />
+  <path class="arrow" d="M1170 245 L1230 245" />
+  <path class="arrow" d="M1170 475 L1230 475" />
+
+  <text class="subtitle" x="80" y="700">Evidence inputs for the current manuscript: publication-suite outputs, paper-bundle manifest and executive summary, support docs, and release-manifest checks.</text>
+  <text class="subtitle" x="80" y="740">This figure captures the package's operational niche: integrating advanced workflow execution with reviewer-facing outputs and traceable release state.</text>
+</svg>

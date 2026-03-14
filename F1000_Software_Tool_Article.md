@@ -69,6 +69,8 @@ A typical user workflow consists of four steps:
 
 Package metadata requires Python 3.11 or later, with optional `.[dev]` extras for local build/test tooling and `.[stan]` extras for Stan-backed workflows when those are needed.
 
+Figure 1 summarizes the manuscript-facing workflow from schema-validated input through model execution, reviewer-facing summaries, and release provenance. The aligned figure asset and caption are provided in `f1000_artifacts/Figure_1_reproducibility_workflow.svg` and `f1000_artifacts/figure_captions.md`.
+
 Representative commands are shown below.
 
 ```bash
@@ -89,7 +91,7 @@ Validation evidence in the repository comes from four sources.
 
 **Publication and build pipelines.** Integration tests verify that the publication suite writes machine-readable and markdown outputs, the paper bundle writes a manifest and executive summary, and the build process produces a wheel, an sdist, bundled Stan assets, `SHA256SUMS.txt`, and `release-manifest.json`.
 
-For this manuscript, the quantitative summaries were taken from the generated artifacts `artifacts/publication-suite.json`, `artifacts/publication-summary.md`, `artifacts/paper1-bundle/manifest.json`, and `artifacts/paper1-bundle/paper1-executive-summary.md`. These files are named explicitly because they are the immediate source for the numeric results reported below. They are included in the public GitHub submission snapshot `f1000-submission-2026-03-14`, while DOI-backed archival of that snapshot remains pending.
+For this manuscript, the quantitative summaries were taken from the generated artifacts `artifacts/publication-suite.json`, `artifacts/publication-summary.md`, `artifacts/paper1-bundle/manifest.json`, and `artifacts/paper1-bundle/paper1-executive-summary.md`. These files are named explicitly because they are the immediate source for the numeric results reported below. They are included in the public GitHub submission snapshot `f1000-submission-2026-03-14-final`, while DOI-backed archival of that snapshot remains pending.
 
 ### Locked publication-suite metrics and scenarios
 
@@ -101,9 +103,9 @@ The principal predictive endpoints are defined as follows. Mean Gaussian log sco
 
 ### Publication-suite validation
 
-The default publication suite completed successfully and returned `overall_pass=True`. The exact numeric values summarized in Table 1 are taken from `artifacts/publication-suite.json` and `artifacts/publication-summary.md` in the release tree. The continuous comparison is confirmatory and pre-specified rather than adaptively selected.
+The default publication suite completed successfully and returned `overall_pass=True`. The exact numeric values summarized in Table 2 are taken from `artifacts/publication-suite.json` and `artifacts/publication-summary.md` in the release tree. The continuous comparison is confirmatory and pre-specified rather than adaptively selected.
 
-**Table 1. Bundled publication-suite results generated from release v0.1.1**
+**Table 2. Bundled publication-suite results generated from release v0.1.1**
 
 | Scenario | Candidate model | Baseline model | Networks | Estimable effects | Coverage | Median absolute bias | Strict win rate vs baseline | Mean log-score delta (95% CI) | Gate summary |
 |---|---|---|---:|---:|---:|---:|---:|---|---|
@@ -140,20 +142,21 @@ The current results support three narrower practical claims. First, the package 
 
 Several limitations should be stated clearly. First, the strongest quantitative evidence in the repository comes from simulation and bundled example workflows rather than a large library of committed real-world case studies. Second, the current manuscript does not report standalone quantitative case studies for ML-NMR or the external benchmark adapters, even though those modules are implemented in the package. Third, the ML-NMR workflow is currently limited to continuous outcomes. Fourth, the survival workflow uses interval-specific modeling with an interval-independence approximation noted in the project documentation. Fifth, external R benchmarks depend on optional local availability of `Rscript` and the relevant R packages; the benchmark framework handles unavailable adapters gracefully, but that is not the same as shipping committed external benchmark results for every release. Sixth, the exact generated artifacts cited in this draft are publicly inspectable in the GitHub submission snapshot, but they have not yet been deposited in a DOI-backed archive. Seventh, Zenodo archival for the source and submission snapshot remains pending, so the archived-source DOI required for final journal submission is not yet available. Finally, this is a command-line toolkit rather than a graphical application; it prioritizes reproducibility and explicit configuration over point-and-click accessibility.
 
-Overall, the project already supports a defensible software-tool narrative. The remaining work is now largely publication-facing rather than methodological: finalize DOI archiving for the GitHub submission snapshot and align figures with the current release state.
+Overall, the project already supports a defensible software-tool narrative. The remaining work is now largely publication-facing rather than methodological: finalize DOI archiving for the GitHub submission snapshot.
 
 ## Software availability
 
 - **Source code:** https://github.com/mahmood726-cyber/advanced-nma-pooling
 - **Release analyzed in this article:** https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/v0.1.1
-- **Public submission snapshot for this manuscript:** https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/f1000-submission-2026-03-14
+- **Public submission snapshot for this manuscript:** https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/f1000-submission-2026-03-14-final
 - **Exact generated result files used in this draft:** `artifacts/publication-suite.json`, `artifacts/publication-summary.md`, `artifacts/paper1-bundle/manifest.json`, `artifacts/paper1-bundle/paper1-executive-summary.md` in the submission snapshot above
+- **Figure asset and caption package:** `f1000_artifacts/Figure_1_reproducibility_workflow.svg` and `f1000_artifacts/figure_captions.md`
 - **DOI-backed archival of source and manuscript-result artifacts:** Zenodo deposition pending
 - **License:** MIT
 
 ## Data availability
 
-No new participant-level clinical data were generated for this software article. The repository includes example JSON configurations, synthetic study fixtures used in tests, simulation registries, manuscript-supporting documents, and the exact generated result files named in the Software availability section through the public GitHub submission snapshot. Those outputs remain pending DOI-backed archival through Zenodo.
+No new participant-level clinical data were generated for this software article. The repository includes example JSON configurations, synthetic study fixtures used in tests, simulation registries, manuscript-supporting documents, the aligned figure asset/caption package, and the exact generated result files named in the Software availability section through the public GitHub submission snapshot. Those outputs remain pending DOI-backed archival through Zenodo.
 
 ## Competing interests
 
