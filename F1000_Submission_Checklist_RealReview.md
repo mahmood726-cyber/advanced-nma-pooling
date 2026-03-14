@@ -10,7 +10,7 @@ Package: `C:\Models\advanced-nma-pooling`
 - [x] Implemented package scope is distinguished from the narrower set of workflows quantitatively evidenced in the manuscript.
 - [x] Public repository URL is present in the manuscript: `https://github.com/mahmood726-cyber/advanced-nma-pooling`
 - [x] Public release URL is present in the manuscript: `https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/v0.1.1`
-- [x] Public GitHub submission snapshot is identified in the manuscript: `https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/f1000-submission-2026-03-14-final`
+- [x] Public GitHub submission snapshot is identified in the manuscript: `https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/f1000-submission-2026-03-14-r2`
 - [x] README, CHANGELOG, LICENSE, release manifest, and release checksums are present in the repository.
 - [x] Reproducibility, testing, and validation evidence sections are present.
 - [x] Example generated result files named explicitly in the manuscript:
@@ -19,12 +19,16 @@ Package: `C:\Models\advanced-nma-pooling`
   - `artifacts/paper1-bundle/manifest.json`
   - `artifacts/paper1-bundle/paper1-executive-summary.md`
 - [x] Exact manuscript-result artifacts are prepared for publication in the GitHub submission snapshot.
+- [x] Publication-suite artifacts now require and record a git commit for manuscript-facing runs.
 - [x] Reviewer-facing support artifacts are aligned to the current manuscript evidence:
   - `f1000_artifacts/validation_summary.md`
   - `f1000_artifacts/tutorial_walkthrough.md`
   - `f1000_artifacts/flowchart_blueprint.md`
   - `f1000_artifacts/Figure_1_reproducibility_workflow.svg`
   - `f1000_artifacts/figure_captions.md`
+- [x] Copied release provenance files are included in the submission snapshot:
+  - `f1000_artifacts/release-manifest-v0.1.1.json`
+  - `f1000_artifacts/SHA256SUMS-v0.1.1.txt`
 - [x] Comparator framing is moderated; claims do not assert blanket superiority over existing software.
 - [x] Limitations section explicitly states current manuscript boundaries, including ML-NMR evidence gap, benchmark evidence gap, and pending artifact archiving.
 - [x] Reviewer-facing walkthrough paths are present for publication-suite and paper-bundle workflows.

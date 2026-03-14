@@ -1,0 +1,22 @@
+{
+  "artifacts": [
+    {
+      "filename": "nma_pool-0.1.1-py3-none-any.whl",
+      "path": "C:\\Models\\advanced-nma-pooling\\dist\\nma_pool-0.1.1-py3-none-any.whl",
+      "sha256": "f7027587c88fb05581ca513ba0c79ff920677762d5eba9096dc779e8fc5c45f0",
+      "size_bytes": 83755
+    },
+    {
+      "filename": "nma_pool-0.1.1.tar.gz",
+      "path": "C:\\Models\\advanced-nma-pooling\\dist\\nma_pool-0.1.1.tar.gz",
+      "sha256": "ea1e0d5a34859c7790ff39a40122d8d296ade19ce0863eb1a6c90cae0f83b2f9",
+      "size_bytes": 61620
+    }
+  ],
+  "generated_at_utc": "2026-03-13T22:10:02.506293+00:00",
+  "git_commit": "d7b61ea98be6ee6ce11e61ed6b391a2675bf5c0a",
+  "package_name": "nma-pool",
+  "platform": "Windows-11-10.0.26100-SP0",
+  "python_version": "3.13.7",
+  "version": "0.1.1"
+}

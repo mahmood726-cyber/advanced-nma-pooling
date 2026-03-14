@@ -21,7 +21,7 @@
     "survival_superiority_probability_mcse_max": 0.01,
     "familywise_holm_alpha": 0.10
   },
-  "require_git_commit": false,
+  "require_git_commit": true,
   "continuity_correction": 0.5,
   "continuous": {
     "n_networks": 120,

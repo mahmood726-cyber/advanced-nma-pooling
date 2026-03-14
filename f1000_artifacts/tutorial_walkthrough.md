@@ -16,8 +16,14 @@ This walkthrough is designed for a reviewer or new user who wants to reproduce t
 2. Open `artifacts/paper1-bundle/paper1-executive-summary.md` to confirm the four executed steps, overall publication-gate status, the frequentist `nrs` bias estimate, the Bayesian backend used, and the prior-sensitivity spans.
 3. Open `artifacts/paper1-bundle/manifest.json` to inspect file hashes, copied support documents, and the bundle inventory.
 
+## Path 3: worked mixed-design interpretation
+
+1. Open `configs/example-bias-adjusted.json` to inspect the illustrative A-B and A-C network with two `rct` studies and two `nrs` studies.
+2. Note that the randomized studies encode treatment differences of 1.0 (`B` vs `A`) and 2.0 (`C` vs `A`), whereas the non-randomized studies encode larger apparent differences of 1.6 and 2.6.
+3. Open `artifacts/paper1-bundle/bias-adjusted-result.json` and `artifacts/paper1-bundle/paper1-executive-summary.md` to confirm that the fitted `nrs` bias term is positive and that the resulting treatment effects for `B` and `C` remain close to the randomized scale.
+
 ## Interpretation boundaries
 
 - These walkthroughs reproduce the exact workflow families quantified in the manuscript.
 - They are reviewer-facing validation and reproducibility paths, not substitutes for a broader applied case-study paper.
-- These walkthroughs point to the public GitHub submission snapshot `f1000-submission-2026-03-14-final`; DOI-backed archival through Zenodo remains pending.
+- These walkthroughs point to the public GitHub submission snapshot `f1000-submission-2026-03-14-r2`; DOI-backed archival through Zenodo remains pending.
