@@ -1,9 +1,23 @@
 # Tutorial Walkthrough
 
-Updated: 2026-03-06
+Updated: 2026-03-14
 
-1. Open the documented project entry file in README.
-2. Load example dataset: `artifacts\benchmark-results.json`.
-3. Run default analysis and record primary outputs.
-4. Run one sensitivity configuration and compare key conclusions.
-5. Cross-check outputs against `f1000_artifacts/validation_summary.md`.
+This walkthrough is designed for a reviewer or new user who wants to reproduce the manuscript-grade outputs most directly cited in the F1000 draft.
+
+## Path 1: publication-suite validation
+
+1. Run `nma-pool publication-suite --config configs/example-publication-suite.json --out artifacts/publication-suite.json --summary artifacts/publication-summary.md`.
+2. Open `artifacts/publication-summary.md` to review gate pass/fail status, continuous and survival candidate/baseline model pairs, coverage, median absolute bias, log-score comparisons, superiority probabilities, and multiplicity-adjusted p-values.
+3. Cross-check any manuscript number against `artifacts/publication-suite.json`, which stores the same outputs in machine-readable form.
+
+## Path 2: paper-bundle reproducibility run
+
+1. Run `nma-pool paper1-bundle --config configs/example-paper1-bundle.json --out-dir artifacts/paper1-bundle`.
+2. Open `artifacts/paper1-bundle/paper1-executive-summary.md` to confirm the four executed steps, overall publication-gate status, the frequentist `nrs` bias estimate, the Bayesian backend used, and the prior-sensitivity spans.
+3. Open `artifacts/paper1-bundle/manifest.json` to inspect file hashes, copied support documents, and the bundle inventory.
+
+## Interpretation boundaries
+
+- These walkthroughs reproduce the exact workflow families quantified in the manuscript.
+- They are reviewer-facing validation and reproducibility paths, not substitutes for a broader applied case-study paper.
+- These walkthroughs point to the public GitHub submission snapshot `f1000-submission-2026-03-14`; DOI-backed archival through Zenodo remains pending.

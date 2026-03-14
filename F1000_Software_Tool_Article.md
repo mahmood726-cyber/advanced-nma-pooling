@@ -1,279 +1,184 @@
-# Advanced Nma Pooling: a software tool for reproducible evidence-synthesis and modeling workflows
+# Advanced NMA Pooling v0.1.1: a Python toolkit for reproducible network meta-analysis, bias adjustment, and non-proportional hazards workflows
 
 ## Authors
-- Mahmood Ahmad [1,2]
-- Niraj Kumar [1]
-- Bilaal Dar [3]
-- Laiba Khan [1]
-- Andrew Woo [4]
-- Corresponding author: Andrew Woo (andy2709w@gmail.com)
+Mahmood Ahmad [1,2], Niraj Kumar [1], Bilaal Dar [3], Laiba Khan [1], Andrew Woo [4]
 
-## Affiliations
-1. Royal Free Hospital
-2. Tahir Heart Institute Rabwah
-3. King's College Medical School
-4. St George's Medical School
+### Affiliations
+1. Royal Free Hospital, London, United Kingdom
+2. Tahir Heart Institute, Rabwah, Pakistan
+3. King's College London GKT School of Medical Education, London, United Kingdom
+4. St George's, University of London, London, United Kingdom
+
+Corresponding author: Mahmood Ahmad (mahmood.ahmad2@nhs.net)
 
 ## Abstract
-**Background:** Reproducible evidence-synthesis model development often requires repeated fitting, heterogeneity checks, and structured reporting outputs. Advanced Nma Pooling was prepared to support these workflows in a traceable software package.
 
-**Methods:** The project is implemented using Python, R. The documented workflow covers data import, parameter selection, model execution, diagnostics, and export. The manuscript presents a reviewer-facing reproducibility path with explicit artifact pointers and bounded claims.
+**Background:** Advanced evidence-synthesis workflows often require several model families within one project, including aggregate-data network meta-analysis, mixed aggregate-data and individual patient data integration, design-aware bias adjustment, and survival modeling under non-proportional hazards. In practice these analyses are frequently spread across ad hoc scripts, making configuration capture, validation, and release provenance difficult.
 
-**Results:** The package supports end-to-end local workflows from input through model execution and exportable outputs, with validation evidence linked through project artifacts where available.
+**Methods:** We developed Advanced NMA Pooling v0.1.1 (`nma-pool`), an open-source Python toolkit for config-driven evidence-synthesis workflows. The package implements strict schema-validated data ingestion, aggregate-data network meta-analysis, ML-NMR-style AD+IPD integration, frequentist and Bayesian design-stratified bias-adjusted network meta-analysis, a piecewise exponential survival non-proportional hazards workflow [6], benchmark adapters for external R tools, a publication-grade simulation suite, and a one-command paper bundle that emits manifests and execution summaries. This article reports quantitative results only for the publication-suite and paper-bundle workflows; other modules are described as implemented package capabilities rather than standalone evaluated case studies in this manuscript.
 
-**Conclusions:** Advanced Nma Pooling provides a practical workflow for transparent modeling and evidence synthesis; external submission readiness depends on final public repository metadata and DOI-archived release records.
+**Results:** The repository contains 69 automated tests spanning unit, integration, and simulation layers. In the bundled publication suite, the pre-specified continuous calibration scenario (120 simulated networks, 240 estimable treatment effects) compared `core_fixed_effects` with `core_random_effects`, achieving 95% coverage 0.9417, strict log-score win rate 0.7805, and mean log-score delta 0.0450 (95% CI 0.0039 to 0.0828). In the survival non-proportional hazards scenario (100 simulated networks, 600 estimable interval-treatment effects), `survival_nph_random_effects` achieved coverage 0.9700, median absolute bias 0.0569 versus 0.1882 for the proportional-hazards baseline, bias improvement 0.6973, and strict win rate 1.0000. The example paper bundle completed four workflows successfully, estimated an `nrs` bias term of 0.5635 in the frequentist bias-adjusted example, reproduced similar Bayesian estimates with the analytic backend, and generated a manifest plus hashed outputs.
+
+**Conclusions:** Advanced NMA Pooling v0.1.1 provides a reproducibility-oriented software layer for advanced network meta-analysis workflows. Its main contribution is not a single new estimator, but an integrated package that couples multiple evidence-synthesis models with locked configurations, simulation-based publication gates, and release provenance.
 
 ## Keywords
-network meta-analysis; evidence synthesis; reproducibility; model validation; software tool
-
-## Visual Abstract
-### Workflow overview
-| Panel | Key message | What the software does | Reviewer-check evidence |
-|---|---|---|---|
-| Clinical problem | Evidence-synthesis workflows are often fragmented and hard to audit. | Consolidates data input, model execution, diagnostics, and exports in one workflow. | Manuscript Methods + reproducibility checklist. |
-| Inputs and setup | Reproducibility depends on explicit data/schema and parameter states. | Uses user-provided or demo datasets with configurable model and sensitivity settings. | Use-case walkthrough + saved run configuration. |
-| Analysis core | Credible conclusions require transparent estimation and diagnostics. | Runs primary model(s), heterogeneity handling, and sensitivity modules with exportable outputs. | Results/diagnostic tables + validation artifact paths. |
-| Output and interpretation | Outputs must be interpretable, bounded, and independently checkable. | Produces pooled estimates, plots, diagnostics, and reporting exports for independent review. | Validation evidence table + checklist-linked artifacts. |
-| Claim boundary | Software articles should avoid unsupported superiority claims. | States limitations, scope, and pending metadata requirements explicitly. | Discussion limitations + submission blockers checklist. |
+network meta-analysis, evidence synthesis, reproducibility, ML-NMR, non-proportional hazards, bias adjustment, software tool
 
 ## Introduction
-Complex modeling projects can become difficult to audit when data handling, estimation, diagnostics, and reporting are separated across multiple ad hoc steps. This manuscript documents a consolidated workflow with reproducibility-first structure.
 
-### Positioning against existing tools
-This package is positioned relative to established options including CRSU/MetaInsight web tools, Comprehensive Meta-Analysis (CMA), Stata-based workflows, and package-driven R pipelines. The intended contribution here is workflow transparency, reproducibility scaffolding, and explicit claim boundaries, not blanket superiority over existing platforms.
+Network meta-analysis is widely used to synthesize comparative effectiveness evidence across multiple treatments [1,2]. However, advanced evidence-synthesis projects often extend beyond standard aggregate-data models. Population-adjusted treatment comparisons may require multilevel network meta-regression over combined aggregate-data and individual patient data structures [3]. Mixed-design evidence may require explicit handling of design-related bias, and time-varying treatment effects require methods that do not assume proportional hazards. In research practice these tasks are frequently implemented as a collection of custom scripts, notebooks, and one-off validation code. That fragmentation makes it harder to audit model assumptions, reproduce results from configuration alone, or trace release artifacts back to a fixed source state.
 
-### Table 1. Positioning matrix
-| Dimension | This package | Established alternatives | Claim boundary |
-|---|---|---|---|
-| Primary goal | Transparent, reproducible end-to-end workflow | Mature GUIs/statistical packages with broad legacy adoption | Scope limited to demonstrated workflows |
-| User profile | Clinicians/researchers needing guided reproducibility | Advanced analysts and mixed-skill teams | Complementary use is recommended |
-| Strength emphasis | Auditability, artifact linkage, structured outputs | Feature breadth and ecosystem maturity | Interpret strengths relative to use case |
-| Reproducibility support | Walkthrough + validation summary + checklist | Varies by tool/package and setup | Claims remain artifact-bounded |
+Advanced NMA Pooling was developed as a package-level response to that problem. The project packages several related workflows behind a common CLI and schema-validated configuration layer. The aim is to complement, not replace, established statistical workflows by emphasizing repeatable execution, explicit manifests, manuscript-oriented validation routines, and release provenance. This article describes the current implementation in release v0.1.1, but its quantitative results are intentionally narrower than the full implemented feature set: the manuscript focuses on the publication suite, the survival non-proportional hazards validation path, and the bias-adjusted paper-bundle outputs.
+
+Existing open software already covers many standard evidence-synthesis tasks, including graphical environments aimed at non-programming users and programming packages focused on specific model families. Advanced NMA Pooling is not presented as a blanket replacement for those tools. Its narrower target is operational integration: running multiple advanced workflow families under one locked, auditable, release-managed interface when simulation gates, bundle manifests, and manuscript-facing outputs need to be regenerated from configuration rather than reconstructed from a mixture of scripts.
+
+**Table 1. Positioning of Advanced NMA Pooling relative to common open-tool classes**
+
+| Tool class | Typical strength | Typical gap for the current use case |
+|---|---|---|
+| GUI-oriented evidence-synthesis tools | Low barrier to entry and straightforward standard analyses | Less natural fit for config-locked, multi-workflow, manuscript-rebuild pipelines |
+| Single-model programming packages | Strong depth within a specific modeling family | Often require additional scripting to combine validation, sensitivity, packaging, and release-manifest steps |
+| Advanced NMA Pooling | One CLI-centered workflow layer spanning multiple advanced model families, publication gates, bundles, and provenance outputs | Command-line first, with less end-user accessibility than point-and-click tools |
 
 ## Methods
-### Implementation
-The software package is organized for local execution with explicit analysis states and reproducible outputs. Components cover data handling, model settings, estimation routines, diagnostics, and export.
 
-### Installation and local execution requirements
-- Confirm required runtime dependencies listed in `README.md` and project environment files.
-- Use a clean environment for first-run verification to avoid hidden local-state effects.
-- Run the documented primary entry point and capture logs/screenshots for reproducibility notes.
-- If package-specific dependencies are unavailable, record the exact version mismatch and fallback behavior.
+### Implementation
+
+Advanced NMA Pooling is implemented in Python and distributed as the `nma-pool` package. The source tree is organized into `data`, `models`, `inference`, `validation`, `reporting`, and `pipelines` modules, with optional R adapters in `external/r/` for benchmark comparisons. Input payloads are assembled through a strict data-building layer that checks studies, arms, aggregate outcomes, survival fields, and configuration values before model fitting.
+
+The currently implemented workflow families are:
+
+1. **Aggregate-data NMA.** Config-driven fixed- and random-effects aggregate-data network meta-analysis for continuous and binary outcomes.
+2. **ML-NMR-style AD+IPD integration.** A first-pass multilevel network meta-regression workflow for aggregate-data plus individual patient data integration. The current implementation is restricted to continuous outcomes and supports empirical or Monte Carlo integration.
+3. **Design-stratified bias adjustment.** Frequentist and Bayesian workflows that estimate design-level offsets, for example differences between randomized controlled trials (`rct`) and non-randomized studies (`nrs`).
+4. **Survival non-proportional hazards modeling.** A piecewise exponential survival workflow with interval-specific treatment effects and both fixed- and random-effects non-proportional hazards fits, benchmarked against a proportional-hazards baseline approximation.
+5. **Benchmarking and publication workflows.** External adapter interfaces for R-based comparators, a publication suite built around locked simulation scenarios and gate criteria, and a one-command paper bundle that executes selected workflows and writes a manifest with checksums and copied supporting documents.
+
+The installed CLI exposes these workflows as subcommands: `analysis`, `benchmark`, `bias-adjusted`, `bias-adjusted-bayesian`, `bias-sensitivity`, `mlnmr`, `mlnmr-bayesian`, `survival-nph`, `publication-suite`, and `paper1-bundle`. The release workflow additionally generates `SHA256SUMS.txt` and `release-manifest.json`, linking built artifacts to a specific commit.
+
+The present manuscript does not claim that every implemented subcommand has been quantitatively validated in a standalone case study within this paper. In particular, ML-NMR and external benchmark adapters are described as package capabilities, while the formal numeric results reported here come from the publication-suite and paper-bundle artifacts.
 
 ### Operation
-- Open and run one primary project entry point (e.g., `README.md`).
-- Load demonstration or test data (example reference: `artifacts\benchmark-results.json`).
-- Configure default model and sensitivity settings, then execute analysis.
-- Review outputs and export artifacts for independent verification.
 
-### Table 2. Minimum input schema and validation checks
-| Input field | Required | Validation rule | Failure risk if missing/invalid |
-|---|---|---|---|
-| Study identifier | Yes | Unique per row/group | Mislabelled outputs, merge errors |
-| Effect/endpoint variables | Yes | Numeric + interpretable scale | Invalid model estimation |
-| Uncertainty/count fields | Yes | Non-negative and non-null | Biased weighting or unstable inference |
-| Model-setting metadata | Yes | Explicitly recorded at run time | Non-reproducible reruns |
-| Source file provenance | Recommended | Track input path and version | Ambiguous audit trail |
+A typical user workflow consists of four steps:
 
-### Core equations
-Key equations used in this manuscript are summarized in Table EQ1.
+1. **Configuration and data loading.** Users start from one of the example JSON configurations in `configs/` or provide a custom payload. The package validates study identifiers, arm structure, outcome types, design labels, and model settings before execution.
+2. **Model execution.** The selected CLI subcommand runs the requested workflow and writes machine-readable JSON outputs. Publication-oriented commands also emit markdown summaries.
+3. **Diagnostics and sensitivity assessment.** Workflow outputs include fit summaries, treatment effects, design-bias estimates where relevant, interval-specific survival effects, or predictive superiority diagnostics depending on the pipeline. Bayesian workflows can use the analytic backend or a Stan backend when available.
+4. **Reproducibility export.** The `paper1-bundle` workflow writes a manifest, step timings, copied protocol documents, and the outputs of the executed workflows. Release builds separately generate hashed distribution artifacts and a release manifest.
 
-### Equation summary table
-| Eq. ID | Model component | Expression | Interpretation role |
-|---|---|---|---|
-| E1 | General model specification | `y_i = g(x_i; \theta) + u_i + \varepsilon_i` | Defines core model structure with parameterized signal and noise terms. |
-| E2 | Random-effects variance structure | `u_i \sim \mathcal{N}(0,\tau^2),\; \varepsilon_i \sim \mathcal{N}(0,v_i)` | Encodes heterogeneity and sampling variability assumptions. |
-| E3 | Precision-weighted estimator | `\hat{\theta} = \frac{\sum_i w_i \theta_i}{\sum_i w_i},\; w_i = \frac{1}{v_i + \tau^2}` | Summarizes pooled effects under random-effects weighting. |
+Package metadata requires Python 3.11 or later, with optional `.[dev]` extras for local build/test tooling and `.[stan]` extras for Stan-backed workflows when those are needed.
 
-### Reproducibility and validation
-The package is reported with explicit artifact references so claims can be independently checked.
+Representative commands are shown below.
 
-#### Validation evidence table
-| Validation dimension | Evidence summary | Artifact source |
-|---|---|---|
-| Local execution context | Project execution and output generation are documented for local reruns. | `README.md` |
-| Validation scope | Validation, test, or benchmark artifacts were identified for package-level checking. | `artifacts\benchmark-results.json` |
-| Evidence policy | Claims are bounded to artifact-supported local outputs; no unsupported superiority claims are made. | `F1000_Submission_Checklist_RealReview.md` |
-| Release requirements | Public repository URL and DOI archive are required before external submission. | `F1000_Submission_Checklist_RealReview.md` |
+```bash
+nma-pool analysis --config configs/example-analysis.json --out artifacts/model-card.json
+nma-pool publication-suite --config configs/example-publication-suite.json --out artifacts/publication-suite.json --summary artifacts/publication-summary.md
+nma-pool paper1-bundle --config configs/example-paper1-bundle.json --out-dir artifacts/paper1-bundle
+```
 
-### Core functionality exposed in the package
-- Data ingestion and preprocessing hooks
-- Configurable modeling and sensitivity parameters
-- Diagnostic and interpretive output pathways
-- Exportable artifacts for reporting and reproducibility
+### Validation strategy
 
-### Reviewer-informed reproducibility safeguards
-- End-to-end walkthrough included for independent rerun.
-- Evidence statements tied to local artifact paths.
-- Limitations and claim boundaries stated explicitly.
-- Submission blockers clearly listed in checklist form.
+Validation evidence in the repository comes from four sources.
 
-### Output interpretation guidance
-Interpret outputs jointly across effect estimates, uncertainty intervals, heterogeneity diagnostics, and sensitivity results. For small study counts, rare-event settings, or model-mismatch scenarios, treat asymmetry tests and pooled estimates cautiously. When assumptions are only approximately met (e.g., large-sample approximations), results should be reported with explicit caveats.
+**Automated tests.** The repository currently contains 69 automated tests across unit, integration, and simulation layers. These cover data contracts, model recovery, inconsistency diagnostics, benchmark adapters, CLI execution, build artifacts, and manuscript-oriented pipelines.
 
-### Table 4. Output-to-decision interpretation guide
-| Output type | What it tells you | What it does not guarantee | Reporting recommendation |
-|---|---|---|---|
-| Primary pooled/model estimate | Central tendency under stated assumptions | Universal validity across all settings | Report with assumptions and uncertainty |
-| Heterogeneity metrics | Between-study variability signal | Definitive cause of heterogeneity | Pair with subgroup/sensitivity rationale |
-| Bias/asymmetry checks | Potential small-study/publication-bias signal | Definitive proof of bias mechanism | Report small-k limitations explicitly |
-| Sensitivity analyses | Robustness under alternate assumptions | Immunity to all model misspecification | Present scenario-wise evidence table |
+**Model-behavior tests.** Unit tests verify that the core aggregate-data model recovers known treatment effects, ML-NMR recovers treatment and interaction effects under controlled settings, bias-adjusted models improve over naive pooling when design bias is injected, and inconsistency diagnostics flag deliberately inconsistent networks without overflagging consistent ones.
 
-## Use cases
-### Demonstration dataset used for manuscript walkthrough
-- Dataset reference: `artifacts\benchmark-results.json`
-- Rationale: fixed demonstration artifacts improve reviewer reproducibility.
+**Simulation calibration.** The strongest single quantitative test is the survival non-proportional hazards calibration test. Across 80 simulated seeds, the test asserts a median absolute error below 0.10 and empirical 95% interval coverage between 0.93 and 0.97 for interval-specific treatment effects.
 
-### Use case 1: Primary model execution
-Workflow:
-- Load demonstration data and run default model configuration.
-- Review primary outputs and uncertainty diagnostics.
-- Export results for reproducibility archive.
+**Publication and build pipelines.** Integration tests verify that the publication suite writes machine-readable and markdown outputs, the paper bundle writes a manifest and executive summary, and the build process produces a wheel, an sdist, bundled Stan assets, `SHA256SUMS.txt`, and `release-manifest.json`.
 
-Expected outputs for manuscript:
-- Primary estimate summary
-- Diagnostics and model-status outputs
-- Exportable reporting artifacts
+For this manuscript, the quantitative summaries were taken from the generated artifacts `artifacts/publication-suite.json`, `artifacts/publication-summary.md`, `artifacts/paper1-bundle/manifest.json`, and `artifacts/paper1-bundle/paper1-executive-summary.md`. These files are named explicitly because they are the immediate source for the numeric results reported below. They are included in the public GitHub submission snapshot `f1000-submission-2026-03-14`, while DOI-backed archival of that snapshot remains pending.
 
-### Use case 2: Sensitivity and robustness check
-Workflow:
-- Re-run with alternative settings (e.g., heterogeneity/sensitivity options).
-- Compare directional and magnitude stability of key outputs.
-- Document any materially different conclusions.
+### Locked publication-suite metrics and scenarios
 
-Expected outputs for manuscript:
-- Sensitivity-aware interpretation
-- Traceable robustness evidence
+The publication-suite configuration is locked in `configs/example-publication-suite.json`, with scenario definitions summarized in `docs/validation/paper1-simulation-registry.md`. The continuous confirmatory scenario uses 120 A-B-C simulated networks (seeds 1000 to 1119; 120 participants per arm; arm-level SE 0.25; observation noise SD 0.25; study heterogeneity SD 0.0) and compares a pre-specified candidate model, `core_fixed_effects`, with a pre-specified baseline model, `core_random_effects`. The survival scenario uses 100 simulated non-proportional hazards networks (seeds 2000 to 2099; 650 participants per arm; intervals [0,3], [3,6], and [6,12]; follow-up fraction 0.85) and compares `survival_nph_random_effects` with `survival_ph_fixed_effects`.
 
-### Reviewer-facing walkthrough (replicable package check)
-1. Run one documented entry point (e.g., `README.md`).
-2. Load a demonstration/test dataset (e.g., `artifacts\benchmark-results.json`).
-3. Execute default analysis and record outputs.
-4. Execute at least one sensitivity rerun and compare conclusions.
-5. Cross-check outputs against listed validation evidence paths.
+The principal predictive endpoints are defined as follows. Mean Gaussian log score [4] is averaged over estimable paired predictions. Strict win rate is the proportion of non-tied paired comparisons where the candidate score exceeds the baseline score; ties are excluded from the denominator. Mean log-score delta is the paired candidate-minus-baseline difference in mean Gaussian log score. Superiority probability is the bootstrap estimate of `P(delta > 0)`. One-sided sign, permutation, and signed-rank tests are also reported, with Holm-adjusted multiplicity control [5] when configured. The locked gate thresholds in the example configuration were coverage 0.93 to 0.97, continuous strict win rate at least 0.70, survival bias improvement at least 0.20, survival strict win rate at least 0.80, and pre-specified maxima for inferential p-values and Monte Carlo standard errors. These thresholds are project-level release gates for the bundled scenarios, intended to detect regressions in the reference workflows rather than to define universal adequacy criteria for all network meta-analysis software or applied evidence-synthesis projects.
 
-### User tutorial and onboarding
-- Start with packaged demonstration data before using external data.
-- Verify exported results against on-screen summaries.
-- Use checklist items before submission or release tagging.
-- Report warnings and convergence caveats with analysis outputs.
+## Results
 
-### Table 5. Assumptions, diagnostics, and caution flags
-| Component | Assumption | Recommended diagnostic | Caution flag |
-|---|---|---|---|
-| Effect model | Chosen form reflects study design and outcome scale | Residual pattern + sensitivity reruns | Large directional shifts across settings |
-| Heterogeneity handling | Random-effects assumptions are plausible | Tau/I2/Q-related diagnostics | Small-k instability or extreme heterogeneity |
-| Approximation regime | Large-sample approximations adequate for data context | Rare-event and small-k checks | Sparse events / unstable variance |
-| Sensitivity module | Alternative settings should not reverse core interpretation without explanation | Structured scenario comparison table | Inference changes without transparent rationale |
+### Publication-suite validation
+
+The default publication suite completed successfully and returned `overall_pass=True`. The exact numeric values summarized in Table 1 are taken from `artifacts/publication-suite.json` and `artifacts/publication-summary.md` in the release tree. The continuous comparison is confirmatory and pre-specified rather than adaptively selected.
+
+**Table 1. Bundled publication-suite results generated from release v0.1.1**
+
+| Scenario | Candidate model | Baseline model | Networks | Estimable effects | Coverage | Median absolute bias | Strict win rate vs baseline | Mean log-score delta (95% CI) | Gate summary |
+|---|---|---|---:|---:|---:|---:|---:|---|---|
+| Continuous calibration | `core_fixed_effects` | `core_random_effects` | 120 | 240 | 0.9417 | 0.1967 | 0.7805 | 0.0450 (0.0039 to 0.0828) | All continuous gates passed |
+| Survival non-PH | `survival_nph_random_effects` | `survival_ph_fixed_effects` | 100 | 600 | 0.9700 | 0.0569 | 1.0000 | 7.8906 (7.7282 to 8.0687) | All survival gates passed |
+
+In the continuous scenario, the fixed-effects candidate and random-effects baseline had the same median absolute bias to machine precision, but the fixed-effects model achieved a better mean log score, a strict win rate of 0.7805, and multiplicity-adjusted permutation, sign-test, and signed-rank p-values below the configured thresholds. Practically, this indicates slightly better average predictive fit without sacrificing nominal interval coverage in the locked continuous setting. In the survival scenario, the non-proportional hazards random-effects candidate materially outperformed the proportional-hazards baseline. The baseline median absolute bias was 0.1882, whereas the candidate median absolute bias was 0.0569, corresponding to a 69.7% improvement. The candidate also achieved strict win rate 1.0000, bootstrap superiority probability 1.0000, and coverage 0.9700. In practical terms, the non-proportional hazards workflow was clearly preferable when the data-generating process contained time-varying effects.
+
+### Paper-bundle reproducibility run
+
+The example `paper1-bundle` workflow executed four steps successfully: `publication_suite`, `bias_adjusted`, `bias_adjusted_bayesian`, and `bias_sensitivity`. The generated manifest recorded hashes for all emitted outputs and copied four manuscript-supporting documents into the bundle.
+
+The bundled bias-adjusted example estimated an `nrs` bias term of 0.5635 in the frequentist workflow. The Bayesian bias-adjusted example used the analytic backend and produced a similar `nrs` bias estimate of 0.5680. In this synthetic mixed-design example, the positive `nrs` term means that the non-randomized evidence stream was estimated to sit above the randomized evidence scale by roughly 0.56 model-scale units, so the bias-adjusted fit separated the design strata rather than forcing a single pooled effect. The prior-sensitivity workflow evaluated 24 scenarios; across these runs, the estimated treatment effect span was 0.1525 for treatment `B` and 0.1517 for treatment `C`, while the `nrs` bias span was 0.2693. Those spans indicate modest movement across the tested prior grid in this example, but not a reversal of the treatment ordering. Together, these outputs show that the package can produce not only model fits but also a reproducibility bundle that documents what was run, how long it took, and which files were generated.
+
+### Software provenance and packaging
+
+The repository-level evidence also includes software provenance separate from statistical validation. The build integration test confirms that the wheel contains the packaged Stan models and the `nma-pool` CLI entry point, and that the release-manifest script writes both `SHA256SUMS.txt` and `release-manifest.json`. In the current release tree, the public GitHub repository and `v0.1.1` tag correspond to commit `d7b61ea98be6ee6ce11e61ed6b391a2675bf5c0a`, and the checked release manifest records the wheel and source distribution hashes for that commit.
+
+### Reviewer-facing reproducibility path 1: manuscript-grade simulation reporting
+
+A reviewer can reproduce the manuscript-oriented validation path by running the publication suite from the example configuration. The command writes a JSON artifact plus a human-readable summary that reports candidate/baseline model pairs, coverage, median absolute bias, mean log score, bootstrap intervals for paired log-score deltas, one-sided sign, permutation, and signed-rank tests, Monte Carlo standard errors, and gate pass/fail status. This is a synthetic validation workflow aimed at methods evaluation rather than a clinical case-study analysis.
+
+### Reviewer-facing reproducibility path 2: mixed-design bias adjustment and sensitivity analysis
+
+A second reviewer-facing use case is the bias-adjusted bundle path. Starting from the example paper-bundle configuration, the package executes a frequentist bias-adjusted model, a Bayesian bias-adjusted model, and a prior-sensitivity grid. The resulting manifest and executive summary make it possible to compare the estimated treatment effects, the size of the `nrs` bias term, the backend actually used, and the stability of estimates under alternative prior settings without manually stitching together outputs from separate scripts. This section is deliberately framed as a reproducibility path; it is not presented here as a standalone applied mixed-design evidence-synthesis case study.
 
 ## Discussion
-The primary strength is operational transparency: workflow steps, outputs, and evidence references are all documented in one package-level path. This improves reviewer auditability and reduces undocumented handoffs.
 
-### Limitations and claim boundaries (review-informed)
-- The package is not framed as a universal replacement for all existing methods/tools.
-- Claims are restricted to artifact-supported local workflows.
-- Interpretation quality remains dependent on methodological fit and data quality.
-- Repository URL and DOI metadata are still required before submission.
+Advanced NMA Pooling v0.1.1 is best understood as a reproducibility-oriented toolkit for advanced evidence-synthesis workflows. The package brings together aggregate-data network meta-analysis, ML-NMR-style AD+IPD integration, mixed-design bias adjustment, survival non-proportional hazards modeling, benchmarking, and manuscript-oriented validation under a common config-driven interface. The main contribution is operational integration: tests, simulation gates, paper bundles, and release manifests are treated as first-class outputs rather than afterthoughts.
 
-## Conclusions
-Advanced Nma Pooling is structured for reproducible modeling workflows with explicit evidence mapping and bounded claims. With final repository/DOI metadata completed, the package is prepared for software-tool reporting.
+That positioning matters because the relevant comparison set already includes mature open tools for standard aggregate-data synthesis, some with graphical interfaces and some as well-documented programming packages. The contribution claimed here is narrower and more operational: a reproducibility-first command-line layer that allows one project to carry schema validation, multiple advanced workflow families, publication-suite gates, and release manifests together. The package should therefore be judged primarily on integration, traceability, and workflow reproducibility rather than on whether it supersedes every existing GUI-oriented network meta-analysis environment.
 
-<!-- FLOWCHART_BLOCK_START -->
-## Workflow Figure Blueprint
+The current results support three narrower practical claims. First, the package has non-trivial automated validation breadth, with 69 tests covering schemas, model behavior, simulation calibration, CLI execution, and build provenance. Second, the bundled publication suite produces quantitative results that pass its locked gate criteria in the current release tree. Third, the paper-bundle workflow can assemble multiple outputs and supporting documents into a manifest-based bundle suitable for internal review and manuscript preparation. These claims are stronger than a generic feature list because they are backed by concrete generated artifacts, but they remain narrower than a full empirical validation of every implemented workflow.
 
-### Figure FA1. End-to-end analytical flowchart
-Recommended node sequence:
-1. Data input and schema checks
-2. Model setup and assumptions
-3. Primary estimation
-4. Diagnostics and heterogeneity review
-5. Sensitivity and robustness analysis
-6. Export, reporting, and reproducibility checks
+Several limitations should be stated clearly. First, the strongest quantitative evidence in the repository comes from simulation and bundled example workflows rather than a large library of committed real-world case studies. Second, the current manuscript does not report standalone quantitative case studies for ML-NMR or the external benchmark adapters, even though those modules are implemented in the package. Third, the ML-NMR workflow is currently limited to continuous outcomes. Fourth, the survival workflow uses interval-specific modeling with an interval-independence approximation noted in the project documentation. Fifth, external R benchmarks depend on optional local availability of `Rscript` and the relevant R packages; the benchmark framework handles unavailable adapters gracefully, but that is not the same as shipping committed external benchmark results for every release. Sixth, the exact generated artifacts cited in this draft are publicly inspectable in the GitHub submission snapshot, but they have not yet been deposited in a DOI-backed archive. Seventh, Zenodo archival for the source and submission snapshot remains pending, so the archived-source DOI required for final journal submission is not yet available. Finally, this is a command-line toolkit rather than a graphical application; it prioritizes reproducibility and explicit configuration over point-and-click accessibility.
 
-Design specifications:
-- Use clean vector geometry, no decorative backgrounds.
-- Keep labels short, method-focused, and assumption-aware.
-- Ensure grayscale legibility for print workflows.
-- Keep scientific claims in manuscript text/tables; flowchart is explanatory only.
-
-Proposed figure files:
-- `figures/figure00_workflow_flowchart.png` (working draft)
-- `figures/figure00_workflow_flowchart.tiff` (submission-ready raster)
-- `figures/figure00_workflow_flowchart.eps` (submission-ready vector)
-
-### Infographic-style quick panel
-If needed, add a one-panel “study at a glance” infographic summarizing:
-- Problem context
-- Workflow contribution
-- Validation evidence anchor
-- Claim boundary statement
-<!-- FLOWCHART_BLOCK_END -->
-
-## Figures and visual walkthrough
-Figure 1. Full-page interface or primary run overview.
-
-Figure 2. Model configuration and parameter workflow.
-
-Figure 3. Primary results and diagnostics view.
-
-Figure 4. Sensitivity/robustness view.
-
-Figure 5. Export/reporting workflow view.
-
-Figure assets should be generated from representative full-page runs and mapped to Figure 1-5 during final submission.
-
-### Submission figure files (separate, 300 DPI; screenshots only)
-- `figures/figure01_overview_fullpage.tiff` and `figures/figure01_overview_fullpage.eps`
-- `figures/figure02_model_fullpage.tiff` and `figures/figure02_model_fullpage.eps`
-- `figures/figure03_results_fullpage.tiff` and `figures/figure03_results_fullpage.eps`
-- `figures/figure04_bias_fullpage.tiff` and `figures/figure04_bias_fullpage.eps`
-- `figures/figure05_report_fullpage.tiff` and `figures/figure05_report_fullpage.eps`
-
-### Table 3. Reproducibility and submission readiness map
-| Item | Local artifact | Current status | Action before external submission |
-|---|---|---|---|
-| Example walkthrough dataset | `artifacts\benchmark-results.json` | Present | Verify rerun on clean machine |
-| Validation summary | `f1000_artifacts/validation_summary.md` | Present | Confirm numbers and paths |
-| User walkthrough | `f1000_artifacts/tutorial_walkthrough.md` | Present | Align screenshots/captions |
-| Repository metadata | `[TO_BE_ADDED_GITHUB_OR_GITLAB_URL]` | Placeholder | Replace after final tagging |
-| DOI metadata | `[TO_BE_ADDED_ZENODO_DOI]` | Placeholder | Replace after Zenodo archive creation |
+Overall, the project already supports a defensible software-tool narrative. The remaining work is now largely publication-facing rather than methodological: finalize DOI archiving for the GitHub submission snapshot and align figures with the current release state.
 
 ## Software availability
-- Local source package: `advanced-nma-pooling` under `C:\Models`.
-- Public repository (placeholder): `[TO_BE_ADDED_GITHUB_OR_GITLAB_URL]`
-- Zenodo DOI (placeholder): `[TO_BE_ADDED_ZENODO_DOI]`
-- Version: 0.1.0
-- Reproducibility walkthrough: `f1000_artifacts/tutorial_walkthrough.md`
-- Validation summary: `f1000_artifacts/validation_summary.md`
-- License: see package `LICENSE` file.
-- Note: repository and DOI placeholders are intentionally retained until release archival is finalized.
+
+- **Source code:** https://github.com/mahmood726-cyber/advanced-nma-pooling
+- **Release analyzed in this article:** https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/v0.1.1
+- **Public submission snapshot for this manuscript:** https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/f1000-submission-2026-03-14
+- **Exact generated result files used in this draft:** `artifacts/publication-suite.json`, `artifacts/publication-summary.md`, `artifacts/paper1-bundle/manifest.json`, `artifacts/paper1-bundle/paper1-executive-summary.md` in the submission snapshot above
+- **DOI-backed archival of source and manuscript-result artifacts:** Zenodo deposition pending
+- **License:** MIT
+
 ## Data availability
-No new participant-level clinical data were generated for this software article package. Example dataset for reviewer walkthrough: `artifacts\benchmark-results.json`. Additional project data assets, where present, remain available within the local package tree.
-## Reporting guidelines
-Real-peer-review-aligned checklist included: `F1000_Submission_Checklist_RealReview.md`.
 
-## Declarations
-### Competing interests
-The author declares that no competing interests were disclosed.
+No new participant-level clinical data were generated for this software article. The repository includes example JSON configurations, synthetic study fixtures used in tests, simulation registries, manuscript-supporting documents, and the exact generated result files named in the Software availability section through the public GitHub submission snapshot. Those outputs remain pending DOI-backed archival through Zenodo.
 
-### Grant information
-No specific grant was declared for this manuscript draft.
+## Competing interests
 
-### Author contributions (CRediT)
-| Author | CRediT roles |
-|---|---|
-| Mahmood Ahmad | Conceptualization; Software; Validation; Data curation; Writing - original draft; Writing - review and editing |
-| Niraj Kumar | Conceptualization |
-| Bilaal Dar | Conceptualization |
-| Laiba Khan | Conceptualization |
-| Andrew Woo | Conceptualization |
+No competing interests were disclosed.
 
-### Acknowledgements
-The author acknowledges contributors to open statistical methods and reproducible software engineering practices.
+## Grant information
+
+The authors declared that no grants were involved in supporting this work.
+
+## Acknowledgements
+
+The authors thank the developers of the open statistical software and methods literature on which the package builds. The repository also includes optional R adapters for external benchmarking workflows.
 
 ## References
-1. DerSimonian R, Laird N. Meta-analysis in clinical trials. Controlled Clinical Trials. 1986;7(3):177-188.
-2. Higgins JPT, Thompson SG. Quantifying heterogeneity in a meta-analysis. Statistics in Medicine. 2002;21(11):1539-1558.
-3. Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. BMJ. 2021;372:n71.
-4. Guyatt GH, Oxman AD, Vist GE, et al. GRADE: an emerging consensus on rating quality of evidence and strength of recommendations. BMJ. 2008;336(7650):924-926.
-5. Fay C, Rochette S, Guyader V, Girard C. Engineering Production-Grade Shiny Apps. Chapman and Hall/CRC. 2022.
+
+[1] Lu G, Ades AE. Combination of direct and indirect evidence in mixed treatment comparisons. Stat Med. 2004;23(20):3105-3124.
+
+[2] Salanti G. Indirect and mixed-treatment comparison, network, or multiple-treatments meta-analysis: many names, many benefits, many concerns for the next generation evidence synthesis tool. Res Synth Methods. 2012;3(2):80-97.
+
+[3] Phillippo DM, Ades AE, Dias S, Palmer S, Abrams KR, Welton NJ. Multilevel network meta-regression for population-adjusted treatment comparisons. J R Stat Soc Ser A Stat Soc. 2020;183(3):1189-1210.
+
+[4] Gneiting T, Raftery AE. Strictly proper scoring rules, prediction, and estimation. J Am Stat Assoc. 2007;102(477):359-378.
+
+[5] Holm S. A simple sequentially rejective multiple test procedure. Scand J Stat. 1979;6(2):65-70.
+
+[6] Holford TR. The analysis of rates and of survivorship using log-linear models. Biometrics. 1980;36(2):299-305.
+
+[7] Page MJ, McKenzie JE, Bossuyt PM, Boutron I, Hoffmann TC, Mulrow CD, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. BMJ. 2021;372:n71.
