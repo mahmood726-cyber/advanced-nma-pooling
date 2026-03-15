@@ -1,13 +1,13 @@
 # Paper 1 Executive Summary
 
-- Generated at: 2026-02-28T21:39:41.373486+00:00
+- Generated at: 2026-03-14T21:43:24.851596+00:00
 - Step count: 4
 
 ## Step Status
-- `publication_suite`: success (6.66s)
-- `bias_adjusted`: success (0.37s)
-- `bias_adjusted_bayesian`: success (0.47s)
-- `bias_sensitivity`: success (0.91s)
+- `publication_suite`: success (68.14s)
+- `bias_adjusted`: success (17.24s)
+- `bias_adjusted_bayesian`: success (17.39s)
+- `bias_sensitivity`: success (21.55s)
 
 ## Publication Gates
 - `overall_pass`: True
@@ -23,6 +23,7 @@
 - `continuous_logscore_win_rate_vs_baseline`: PASS
 - `continuous_superiority_probability_mcse_within_max`: PASS
 - `continuous_superiority_probability_vs_baseline`: PASS
+- `git_commit_present`: PASS
 - `survival_bias_improvement_vs_baseline`: PASS
 - `survival_coverage_95_in_target`: PASS
 - `survival_logscore_delta_ci95_lb_vs_baseline`: PASS

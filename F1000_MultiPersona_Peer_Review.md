@@ -6,74 +6,66 @@ Calibration source: `C:\Users\user\OneDrive - NHS\Desktop\reviewer Report.txt`
 
 ## Overall decision
 
-Moderate revision before external submission. The package is now materially stronger than the real-world failure cases in the reviewer report: the manuscript no longer reads like a skeleton outline, the reviewer-facing support files are aligned, the figure package is aligned, and the exact manuscript-result files are prepared for exposure in a public GitHub submission snapshot. The remaining blockers are now concentrated in archival packaging and a few medium-severity framing issues.
+Minor revision before external submission.
+
+The local package now addresses the main reviewer-shaped weaknesses identified in the previous round. The manuscript-facing publication artifacts record a fixed git commit, the manuscript names representative tool comparators, the mixed-design example is more concrete, and the submission snapshot includes copied release-provenance files alongside the cited outputs. The only clear submission blocker that remains is external DOI-backed archival.
 
 ## Findings
 
-### 1. High - DOI-backed archival is still pending even after the GitHub submission snapshot is prepared
+### 1. High - DOI-backed archival is still the only real submission blocker
 **Personas:** Reproducibility, Editorial  
-**References:** `F1000_Software_Tool_Article.md` lines 94, 151-154; `F1000_Submission_Checklist_RealReview.md` lines 32-33
+**References:** `F1000_Software_Tool_Article.md`; `F1000_Cover_Letter.md`; `F1000_Submission_Checklist_RealReview.md`
 
-The strongest provenance problem is now narrower than before. The manuscript package can point readers to a public GitHub submission snapshot containing the revised paper materials and exact result files, but the DOI-backed archival step required for final software-tool submission is still pending.
+The manuscript, cover letter, and checklist now consistently state that Zenodo deposition is pending. That is accurate, but it still leaves the package short of a final F1000-ready archived-source record.
 
-**Needed fix:** Deposit the submission snapshot in Zenodo and replace the placeholder language with the DOI.
+**Why this matters:** The local submission bundle is now coherent, but the journal-facing archival requirement is external and still unmet until the public snapshot is deposited and a DOI is minted.
 
-### 2. Medium - Comparator framing is improved but still qualitative rather than demonstrative
-**Personas:** Methods, Editorial  
-**References:** `F1000_Software_Tool_Article.md` lines 33-41, 137-139
+**Needed fix:** Create the Zenodo record from the frozen public snapshot and replace the DOI placeholder everywhere in the submission package.
 
-The revised introduction and discussion now explain that the package is meant to complement existing open software rather than replace it. That addresses one of the major reviewer themes. Even so, the comparison remains qualitative. The paper still does not show a short matrix, worked contrast, or named side-by-side example that makes the package's niche concrete relative to existing GUI-based or single-model toolchains.
+### 2. Medium - The continuous publication-suite scenario remains a low-heterogeneity regression check rather than a broad stress test
+**Personas:** Methods  
+**References:** `F1000_Software_Tool_Article.md`; `configs/example-publication-suite.json`; `artifacts/publication-summary.md`
 
-**Needed fix:** Add a compact comparison paragraph, table, or worked contrast against one or two representative alternatives, or keep the framing explicitly modest.
+The current continuous scenario still uses `study_heterogeneity_sd: 0.0`. That is no longer hidden or overstated: the manuscript now explicitly frames this as a locked regression-and-stability check. Even so, a skeptical methods reviewer could still note that it is a favorable confirmatory setting rather than a general heterogeneity stress test.
 
-### 3. Medium - The demonstrated use cases remain synthetic validation and reproducibility paths rather than an applied analysis
-**Personas:** Methods, Editorial  
-**References:** `F1000_Software_Tool_Article.md` lines 127-131; `f1000_artifacts/tutorial_walkthrough.md` lines 5-23
+**Why this matters:** This is now mainly a limitation of scope rather than a manuscript defect. The framing is substantially improved, but the underlying scenario remains intentionally narrow.
 
-The package now offers a much better reviewer-facing walkthrough, and that is directly responsive to the real reviewer comments. But the evidence base still centers on simulation validation and a synthetic paper bundle. A skeptical reader may still want one short applied example showing how an analyst would interpret outputs in a substantive evidence-synthesis context.
+**Needed fix:** Optional for this submission cycle. If a later revision needs stronger methodological breadth, add one heterogeneity-positive confirmatory scenario to the manuscript-facing suite.
 
-**Needed fix:** Add a concise applied use case, or continue to frame the article as a reproducibility-and-validation paper rather than a general end-user case-study article.
+### 3. Low to medium - The worked mixed-design example is improved, but it is still synthetic rather than a full applied case study
+**Personas:** Editorial, Methods  
+**References:** `F1000_Software_Tool_Article.md`; `f1000_artifacts/tutorial_walkthrough.md`; `artifacts/paper1-bundle/paper1-executive-summary.md`
 
-### 4. Medium - The paper is now structurally aligned, but the archive-facing handoff still depends on Zenodo rather than the repo alone
-**Personas:** Editorial, Reproducibility  
-**References:** `F1000_Submission_Checklist_RealReview.md` lines 32-36, 48-50
+The paper bundle now reads as a genuine worked example rather than a vague reviewer checklist: the manuscript explains the randomized and non-randomized inputs, interprets the positive `nrs` bias term, and reports the recovered treatment effects. That materially improves the narrative. The remaining limitation is that the example is still a synthetic mixed-design vignette, not a clinical use-case paper.
 
-The article package is now substantially cleaner, with the figure asset/caption package and the final grammar/broken-link pass reflected in the checklist. The remaining problem is external archival completion rather than a repo-side packaging gap.
+**Why this matters:** This is acceptable if the article continues to present itself as a reproducibility-and-validation software paper. It would be weaker only if the paper tried to claim broad applied-case-study validation.
 
-**Needed fix:** Complete the Zenodo archive and replace the DOI placeholder throughout the submission package.
-
-### 5. Medium - The specialist metrics are defined better, but some practical interpretation burden remains on the reader
-**Personas:** Methods, Editorial  
-**References:** `F1000_Software_Tool_Article.md` lines 100, 115, 121
-
-The manuscript now defines the publication-suite endpoints and gives a plain-language interpretation of the `nrs` bias term and prior-sensitivity spans. That is a clear improvement. Even so, the core validation story still depends on specialist metrics such as log-score deltas, superiority probabilities, and internal gate thresholds, so non-methods readers may still need more interpretive guidance than the paper currently provides.
-
-**Needed fix:** Keep the current definitions and consider adding one more sentence per Results subsection explaining what a practically meaningful improvement looks like.
+**Needed fix:** No immediate local fix required beyond keeping the positioning modest, which the current draft does.
 
 ## Persona summaries
 
 ### Methods reviewer
-- Strongest remaining concern: the evidence base is still narrower than a full applied software validation package.
-- Bottom line: the paper is now disciplined about claim scope, but it still needs either public archived artifacts or an even more modest framing.
+- Strongest remaining concern: the central continuous scenario is appropriately described, but still intentionally narrow.
+- Bottom line: acceptable for a software-tool paper if read as reproducibility-oriented validation rather than comprehensive empirical benchmarking.
 
 ### Reproducibility reviewer
-- Strongest remaining concern: Zenodo archival is still pending.
-- Bottom line: this is now mainly an archival/provenance problem rather than a documentation failure.
+- Strongest remaining concern: DOI-backed archival is still external and pending.
+- Bottom line: the local provenance story is now materially stronger because the publication artifacts themselves record commit `694a31770a8e4e51d4ceab43a77d12aaad8795ea` and the submission package includes copied release-manifest and checksum files.
 
 ### Editorial reviewer
-- Strongest remaining concern: the package still needs DOI-backed archival.
-- Bottom line: the draft is structurally sound, but it should not be sent externally until the provenance and snapshot issues are resolved.
+- Strongest remaining concern: the package still needs the final archive DOI before external submission.
+- Bottom line: the manuscript no longer reads like an outline or an under-specified repo description; it now reads like a near-final software-tool submission.
 
 ## Positive notes
 
-- The manuscript now has a complete F1000-style structure and no longer resembles the outline-stage failures described in the supplied reviewer comments.
-- The core quantitative claims are tied to named generated artifacts rather than generic placeholders.
-- Reviewer-facing support files are now aligned to the current publication-suite and paper-bundle evidence.
-- The manuscript package is set up to expose the exact cited result files in a public GitHub submission snapshot.
-- The Results and Discussion sections now do a better job separating implemented capability from empirically demonstrated capability.
+- The previously material provenance gap is fixed: the publication-summary and publication-suite artifacts now record a concrete git commit and the publication configuration requires that capture.
+- The manuscript now names representative comparator classes concretely, including MetaInsight, `netmeta`, and `multinma`, without making exaggerated superiority claims.
+- The mixed-design bundle section now functions as a readable worked example instead of only a reviewer-facing execution note.
+- The submission package includes the aligned figure asset/caption files, copied release provenance files, and the exact generated artifacts cited in the Results section.
+- The full local regression run passed after the tightening changes.
 
 ## Final disposition
 
-Internal decision: moderate revision before submission.
+Internal decision: minor revision.
 
-If the Zenodo archive is completed, the remaining concerns are mostly framing refinements rather than hard blockers. The project now has a credible software-tool manuscript core and a publishable GitHub submission snapshot; the remaining work is primarily external packaging.
+From a local package perspective, the actionable manuscript and reproducibility issues are substantially resolved. The remaining mandatory step is external archival: mint the Zenodo DOI from the frozen GitHub snapshot and patch that DOI into the submission materials.

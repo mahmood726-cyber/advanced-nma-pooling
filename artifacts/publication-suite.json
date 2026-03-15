@@ -1,5 +1,5 @@
 {
-  "config_sha256": "e42845685299620ec9ffb6f63db35b3cebd08341a8fb025caa859b5cdc6c95f4",
+  "config_sha256": "52e82bfc0dc68d6663e0b809a2f21e9fcda0cd7eedad2fa0a4c6d845c311bcb9",
   "continuous": {
     "baseline_model": "core_random_effects",
     "candidate_bias_improvement_fraction": 1.12866533007624e-15,
@@ -51,7 +51,7 @@
     },
     "scenario_id": "continuous_abc"
   },
-  "created_at_utc": "2026-02-28T21:39:28.376938+00:00",
+  "created_at_utc": "2026-03-14T21:41:02.022311+00:00",
   "gates": {
     "continuous_coverage_95_in_target": true,
     "continuous_logscore_delta_ci95_lb_vs_baseline": true,
@@ -65,6 +65,7 @@
     "continuous_logscore_win_rate_vs_baseline": true,
     "continuous_superiority_probability_mcse_within_max": true,
     "continuous_superiority_probability_vs_baseline": true,
+    "git_commit_present": true,
     "survival_bias_improvement_vs_baseline": true,
     "survival_coverage_95_in_target": true,
     "survival_logscore_delta_ci95_lb_vs_baseline": true,
@@ -79,7 +80,7 @@
     "survival_superiority_probability_mcse_within_max": true,
     "survival_superiority_probability_vs_baseline": true
   },
-  "git_commit": null,
+  "git_commit": "694a31770a8e4e51d4ceab43a77d12aaad8795ea",
   "inferential_adjusted_p_values": {
     "continuous_logscore_permutation_p": 0.012299385030748462,
     "continuous_logscore_sign_test_p": 0.0006462855635618325,

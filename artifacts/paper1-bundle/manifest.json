@@ -18,19 +18,19 @@
       "source": "C:\\Models\\advanced-nma-pooling\\docs\\methods\\research-synthesis-methods-readiness.md"
     }
   ],
-  "created_at_utc": "2026-02-28T21:39:41.402058+00:00",
+  "created_at_utc": "2026-03-14T21:43:25.649499+00:00",
   "input_config_path": "C:\\Models\\advanced-nma-pooling\\configs\\example-paper1-bundle.json",
   "input_config_sha256": "f938913984db92bb417a7998535dbd0d5b06820122536b86eb079eda38f75946",
   "outputs": [
     {
       "path": "C:\\Models\\advanced-nma-pooling\\artifacts\\paper1-bundle\\publication-suite.json",
-      "sha256": "8129b9da54a91d871e9c3614151911fe918b4b96315984222d38eca4f0e705e4",
-      "size_bytes": 7486
+      "sha256": "03a6607d8478b6dde490088cef61f61f0e26bab00634781bf03c0cc45ad068e7",
+      "size_bytes": 7557
     },
     {
       "path": "C:\\Models\\advanced-nma-pooling\\artifacts\\paper1-bundle\\publication-summary.md",
-      "sha256": "969f3b1272bc44f87538494f7c96014d164bf2c5fe5fcd1a846bf46de7a80ccd",
-      "size_bytes": 3514
+      "sha256": "cd79b3d62abee922e02a81b0368fa7b4e76a114f9786a1b733da630aaffd9cfe",
+      "size_bytes": 3577
     },
     {
       "path": "C:\\Models\\advanced-nma-pooling\\artifacts\\paper1-bundle\\bias-adjusted-result.json",
@@ -69,8 +69,8 @@
     },
     {
       "path": "C:\\Models\\advanced-nma-pooling\\artifacts\\paper1-bundle\\paper1-executive-summary.md",
-      "sha256": "df0da1eb064871beaf2acb1fb93dfbd0b7946322738fa681f311c3398d6fcd44",
-      "size_bytes": 2117
+      "sha256": "ea44778a01aee8d28292f516b6cbb90f4d7588300bcde3b2ec56715992986fad",
+      "size_bytes": 2151
     }
   ],
   "platform": "Windows-11-10.0.26100-SP0",
@@ -79,7 +79,9 @@
     {
       "command": [
         "C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
-        "C:\\Models\\advanced-nma-pooling\\pipelines\\run_publication_suite.py",
+        "-m",
+        "nma_pool.cli",
+        "publication-suite",
         "--config",
         "C:\\Models\\advanced-nma-pooling\\configs\\example-publication-suite.json",
         "--out",
@@ -87,23 +89,25 @@
         "--summary",
         "C:\\Models\\advanced-nma-pooling\\artifacts\\paper1-bundle\\publication-summary.md"
       ],
-      "elapsed_seconds": 6.6606111000292,
+      "elapsed_seconds": 68.1367925999948,
       "name": "publication_suite",
       "return_code": 0,
       "status": "success",
       "stderr_excerpt": "",
-      "stdout_excerpt": "ax: PASS\ncontinuous_logscore_permutation_p_holm_adjusted_p_vs_baseline: PASS\ncontinuous_logscore_permutation_p_vs_baseline: PASS\ncontinuous_logscore_sign_test_p_holm_adjusted_p_vs_baseline: PASS\ncontinuous_logscore_sign_test_p_vs_baseline: PASS\ncontinuous_logscore_signed_rank_p_holm_adjusted_p_vs_baseline: PASS\ncontinuous_logscore_signed_rank_p_vs_baseline: PASS\ncontinuous_logscore_win_rate_vs_baseline: PASS\ncontinuous_superiority_probability_mcse_within_max: PASS\ncontinuous_superiority_probability_vs_baseline: PASS\nsurvival_bias_improvement_vs_baseline: PASS\nsurvival_coverage_95_in_target: PASS\nsurvival_logscore_delta_ci95_lb_vs_baseline: PASS\nsurvival_logscore_permutation_mcse_within_max: PASS\nsurvival_logscore_permutation_p_holm_adjusted_p_vs_baseline: PASS\nsurvival_logscore_permutation_p_vs_baseline: PASS\nsurvival_logscore_sign_test_p_holm_adjusted_p_vs_baseline: PASS\nsurvival_logscore_sign_test_p_vs_baseline: PASS\nsurvival_logscore_signed_rank_p_holm_adjusted_p_vs_baseline: PASS\nsurvival_logscore_signed_rank_p_vs_baseline: PASS\nsurvival_logscore_win_rate_vs_baseline: PASS\nsurvival_superiority_probability_mcse_within_max: PASS\nsurvival_superiority_probability_vs_baseline: PASS\n"
+      "stdout_excerpt": "ore_permutation_p_holm_adjusted_p_vs_baseline: PASS\ncontinuous_logscore_permutation_p_vs_baseline: PASS\ncontinuous_logscore_sign_test_p_holm_adjusted_p_vs_baseline: PASS\ncontinuous_logscore_sign_test_p_vs_baseline: PASS\ncontinuous_logscore_signed_rank_p_holm_adjusted_p_vs_baseline: PASS\ncontinuous_logscore_signed_rank_p_vs_baseline: PASS\ncontinuous_logscore_win_rate_vs_baseline: PASS\ncontinuous_superiority_probability_mcse_within_max: PASS\ncontinuous_superiority_probability_vs_baseline: PASS\ngit_commit_present: PASS\nsurvival_bias_improvement_vs_baseline: PASS\nsurvival_coverage_95_in_target: PASS\nsurvival_logscore_delta_ci95_lb_vs_baseline: PASS\nsurvival_logscore_permutation_mcse_within_max: PASS\nsurvival_logscore_permutation_p_holm_adjusted_p_vs_baseline: PASS\nsurvival_logscore_permutation_p_vs_baseline: PASS\nsurvival_logscore_sign_test_p_holm_adjusted_p_vs_baseline: PASS\nsurvival_logscore_sign_test_p_vs_baseline: PASS\nsurvival_logscore_signed_rank_p_holm_adjusted_p_vs_baseline: PASS\nsurvival_logscore_signed_rank_p_vs_baseline: PASS\nsurvival_logscore_win_rate_vs_baseline: PASS\nsurvival_superiority_probability_mcse_within_max: PASS\nsurvival_superiority_probability_vs_baseline: PASS\n"
     },
     {
       "command": [
         "C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
-        "C:\\Models\\advanced-nma-pooling\\pipelines\\run_bias_adjusted.py",
+        "-m",
+        "nma_pool.cli",
+        "bias-adjusted",
         "--config",
         "C:\\Models\\advanced-nma-pooling\\configs\\example-bias-adjusted.json",
         "--out",
         "C:\\Models\\advanced-nma-pooling\\artifacts\\paper1-bundle\\bias-adjusted-result.json"
       ],
-      "elapsed_seconds": 0.3668106000404805,
+      "elapsed_seconds": 17.24065530000371,
       "name": "bias_adjusted",
       "return_code": 0,
       "status": "success",
@@ -113,13 +117,15 @@
     {
       "command": [
         "C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
-        "C:\\Models\\advanced-nma-pooling\\pipelines\\run_bias_adjusted_bayesian.py",
+        "-m",
+        "nma_pool.cli",
+        "bias-adjusted-bayesian",
         "--config",
         "C:\\Models\\advanced-nma-pooling\\configs\\example-bias-adjusted-bayesian.json",
         "--out",
         "C:\\Models\\advanced-nma-pooling\\artifacts\\paper1-bundle\\bias-adjusted-bayesian-result.json"
       ],
-      "elapsed_seconds": 0.46845579997170717,
+      "elapsed_seconds": 17.39378549999674,
       "name": "bias_adjusted_bayesian",
       "return_code": 0,
       "status": "success",
@@ -129,13 +135,15 @@
     {
       "command": [
         "C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
-        "C:\\Models\\advanced-nma-pooling\\pipelines\\run_bias_sensitivity.py",
+        "-m",
+        "nma_pool.cli",
+        "bias-sensitivity",
         "--config",
         "C:\\Models\\advanced-nma-pooling\\configs\\example-bias-sensitivity.json",
         "--out",
         "C:\\Models\\advanced-nma-pooling\\artifacts\\paper1-bundle\\bias-sensitivity-result.json"
       ],
-      "elapsed_seconds": 0.9141207000357099,
+      "elapsed_seconds": 21.5505501999869,
       "name": "bias_sensitivity",
       "return_code": 0,
       "status": "success",

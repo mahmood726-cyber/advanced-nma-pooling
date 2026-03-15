@@ -1,8 +1,8 @@
 # Publication-Readiness Results
 
-- `created_at_utc`: 2026-02-28T21:39:28.376938+00:00
+- `created_at_utc`: 2026-03-14T21:41:02.022311+00:00
 - `overall_pass`: True
-- `git_commit`: unknown
+- `git_commit`: 694a31770a8e4e51d4ceab43a77d12aaad8795ea
 
 ## Gates
 - `continuous_coverage_95_in_target`: PASS
@@ -17,6 +17,7 @@
 - `continuous_logscore_win_rate_vs_baseline`: PASS
 - `continuous_superiority_probability_mcse_within_max`: PASS
 - `continuous_superiority_probability_vs_baseline`: PASS
+- `git_commit_present`: PASS
 - `survival_bias_improvement_vs_baseline`: PASS
 - `survival_coverage_95_in_target`: PASS
 - `survival_logscore_delta_ci95_lb_vs_baseline`: PASS
