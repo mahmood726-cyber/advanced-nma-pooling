@@ -20,5 +20,5 @@ This note summarizes the manuscript-facing execution environment and release pro
 
 ## Submission snapshot
 
-- Public GitHub submission snapshot: `f1000-submission-2026-03-14-r2`
+- Public GitHub submission snapshot: `f1000-submission-2026-03-15-r3`
 - DOI-backed archival: pending Zenodo deposition

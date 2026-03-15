@@ -1,6 +1,6 @@
 # F1000 Submission Checklist (Real-Review Aligned)
 
-Updated: 2026-03-14
+Updated: 2026-03-15
 Real review source: `C:\Users\user\OneDrive - NHS\Desktop\reviewer Report.txt`
 Package: `C:\Models\advanced-nma-pooling`
 
@@ -10,7 +10,7 @@ Package: `C:\Models\advanced-nma-pooling`
 - [x] Implemented package scope is distinguished from the narrower set of workflows quantitatively evidenced in the manuscript.
 - [x] Public repository URL is present in the manuscript: `https://github.com/mahmood726-cyber/advanced-nma-pooling`
 - [x] Public release URL is present in the manuscript: `https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/v0.1.1`
-- [x] Public GitHub submission snapshot is identified in the manuscript: `https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/f1000-submission-2026-03-14-r2`
+- [x] Public GitHub submission snapshot is identified in the manuscript: `https://github.com/mahmood726-cyber/advanced-nma-pooling/tree/f1000-submission-2026-03-15-r3`
 - [x] README, CHANGELOG, LICENSE, release manifest, and release checksums are present in the repository.
 - [x] Reproducibility, testing, and validation evidence sections are present.
 - [x] Example generated result files named explicitly in the manuscript:
@@ -30,7 +30,10 @@ Package: `C:\Models\advanced-nma-pooling`
   - `f1000_artifacts/release-manifest-v0.1.1.json`
   - `f1000_artifacts/SHA256SUMS-v0.1.1.txt`
 - [x] Comparator framing is moderated; claims do not assert blanket superiority over existing software.
+- [x] Title, abstract, and discussion frame the article as a reproducibility-oriented software-tool paper rather than a comprehensive methods-validation paper.
+- [x] Engineering verification evidence is explicitly distinguished from methodological validation and cross-software concordance.
 - [x] Limitations section explicitly states current manuscript boundaries, including ML-NMR evidence gap, benchmark evidence gap, and pending artifact archiving.
+- [x] Discussion no longer suggests that the only remaining work is publication packaging; it separates the mandatory archival step from future methodological extensions.
 - [x] Reviewer-facing walkthrough paths are present for publication-suite and paper-bundle workflows.
 - [x] Methods now define key publication-suite endpoints and locked scenario settings.
 - [ ] Public DOI-backed archive for source release is still pending.

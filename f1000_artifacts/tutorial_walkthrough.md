@@ -26,4 +26,4 @@ This walkthrough is designed for a reviewer or new user who wants to reproduce t
 
 - These walkthroughs reproduce the exact workflow families quantified in the manuscript.
 - They are reviewer-facing validation and reproducibility paths, not substitutes for a broader applied case-study paper.
-- These walkthroughs point to the public GitHub submission snapshot `f1000-submission-2026-03-14-r2`; DOI-backed archival through Zenodo remains pending.
+- These walkthroughs point to the public GitHub submission snapshot `f1000-submission-2026-03-15-r3`; DOI-backed archival through Zenodo remains pending.
