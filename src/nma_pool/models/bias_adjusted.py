@@ -122,6 +122,11 @@ class BiasAdjustedNMAPooler:
         )
         if not parameter_treatments:
             raise ValidationError("At least one non-reference treatment is required.")
+        core._validate_identifiable_network(  # noqa: SLF001
+            blocks=blocks,
+            reference_treatment=spec.reference_treatment,
+            outcome_id=spec.outcome_id,
+        )
 
         y, x_trt, v = core._assemble_design(blocks, parameter_treatments, spec.reference_treatment)  # noqa: SLF001
         row_designs = self._row_designs(blocks=blocks, dataset=dataset)
@@ -142,8 +147,9 @@ class BiasAdjustedNMAPooler:
         if not parameter_designs:
             warnings.append("No non-reference designs present; bias terms are omitted.")
         if np.linalg.matrix_rank(x) < x.shape[1]:
-            warnings.append(
-                "Bias-adjusted design matrix is rank-deficient; estimates use pseudo-inverse."
+            raise ValidationError(
+                f"Bias-adjusted design matrix for outcome '{spec.outcome_id}' is "
+                "rank-deficient; treatment effects and design bias terms are not jointly identifiable."
             )
 
         return BiasAdjustedDesignData(

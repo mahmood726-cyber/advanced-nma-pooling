@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import pytest
+
 from nma_pool.data.builder import DatasetBuilder
+from nma_pool.data.schemas import ValidationError
 from nma_pool.models.bias_adjusted import BiasAdjustedNMAPooler
 from nma_pool.models.core_ad import ADNMAPooler
 from nma_pool.models.spec import BiasAdjustedSpec, ModelSpec
@@ -34,6 +37,27 @@ def _cross_design_biased_payload() -> dict:
             {"study_id": "N1", "arm_id": "N1B", "outcome_id": "efficacy", "measure_type": "continuous", "value": 1.6, "se": 0.18},
             {"study_id": "N2", "arm_id": "N2A", "outcome_id": "efficacy", "measure_type": "continuous", "value": 0.0, "se": 0.18},
             {"study_id": "N2", "arm_id": "N2C", "outcome_id": "efficacy", "measure_type": "continuous", "value": 2.6, "se": 0.18},
+        ],
+    }
+
+
+def _disconnected_cross_design_payload() -> dict:
+    return {
+        "studies": [
+            {"study_id": "R1", "design": "rct", "year": 2021, "source_id": "src-r1", "rob_domain_summary": "low"},
+            {"study_id": "N1", "design": "nrs", "year": 2022, "source_id": "src-n1", "rob_domain_summary": "high"},
+        ],
+        "arms": [
+            {"study_id": "R1", "arm_id": "R1A", "treatment_id": "A", "n": 120},
+            {"study_id": "R1", "arm_id": "R1B", "treatment_id": "B", "n": 120},
+            {"study_id": "N1", "arm_id": "N1C", "treatment_id": "C", "n": 120},
+            {"study_id": "N1", "arm_id": "N1D", "treatment_id": "D", "n": 120},
+        ],
+        "outcomes_ad": [
+            {"study_id": "R1", "arm_id": "R1A", "outcome_id": "efficacy", "measure_type": "continuous", "value": 0.0, "se": 0.18},
+            {"study_id": "R1", "arm_id": "R1B", "outcome_id": "efficacy", "measure_type": "continuous", "value": 1.0, "se": 0.18},
+            {"study_id": "N1", "arm_id": "N1C", "outcome_id": "efficacy", "measure_type": "continuous", "value": 2.0, "se": 0.18},
+            {"study_id": "N1", "arm_id": "N1D", "outcome_id": "efficacy", "measure_type": "continuous", "value": 3.0, "se": 0.18},
         ],
     }
 
@@ -88,3 +112,20 @@ def test_bias_adjusted_runs_without_non_reference_designs() -> None:
     assert any("No non-reference designs present" in warning for warning in fit.warnings)
     assert "B" in fit.treatment_effects
     assert "C" in fit.treatment_effects
+
+
+def test_bias_adjusted_rejects_disconnected_network() -> None:
+    dataset = DatasetBuilder().from_payload(_disconnected_cross_design_payload())
+
+    with pytest.raises(ValidationError, match="disconnected treatment network"):
+        BiasAdjustedNMAPooler().fit(
+            dataset,
+            BiasAdjustedSpec(
+                outcome_id="efficacy",
+                measure_type="continuous",
+                reference_treatment="A",
+                random_effects=False,
+                reference_design="rct",
+                bias_prior_sd=1.0,
+            ),
+        )

@@ -9,6 +9,7 @@ from typing import Iterable
 import numpy as np
 
 from nma_pool.data.builder import EvidenceDataset
+from nma_pool.data.network import connected_components
 from nma_pool.data.schemas import ValidationError
 from nma_pool.models.spec import ModelSpec
 
@@ -120,11 +121,17 @@ class ADNMAPooler:
         if not parameter_treatments:
             raise ValidationError("At least one non-reference treatment is required.")
 
+        self._validate_identifiable_network(
+            blocks=blocks,
+            reference_treatment=spec.reference_treatment,
+            outcome_id=spec.outcome_id,
+        )
         y, x, v = self._assemble_design(blocks, parameter_treatments, spec.reference_treatment)
         warnings: list[str] = []
         if np.linalg.matrix_rank(x) < x.shape[1]:
-            warnings.append(
-                "Design matrix is rank-deficient; using pseudo-inverse estimates."
+            raise ValidationError(
+                f"Outcome '{spec.outcome_id}' design matrix is rank-deficient; "
+                "treatment effects are not identifiable for the supplied network."
             )
 
         tau = 0.0
@@ -251,6 +258,47 @@ class ADNMAPooler:
             treatments.update(block.trt_plus)
             treatments.update(block.trt_minus)
         return treatments
+
+    def _connected_treatment_components(
+        self,
+        blocks: Iterable[_StudyBlock],
+    ) -> tuple[tuple[str, ...], ...]:
+        treatments = self._all_treatments(blocks)
+        edges: set[tuple[str, str]] = set()
+        for block in blocks:
+            study_treatments = sorted(set(block.trt_plus) | set(block.trt_minus))
+            for left_idx, left in enumerate(study_treatments):
+                for right in study_treatments[left_idx + 1 :]:
+                    edges.add((left, right))
+        return connected_components(treatments, edges)
+
+    def _validate_identifiable_network(
+        self,
+        *,
+        blocks: Iterable[_StudyBlock],
+        reference_treatment: str,
+        outcome_id: str,
+    ) -> None:
+        components = self._connected_treatment_components(blocks)
+        if len(components) <= 1:
+            return
+
+        reference_component = next(
+            component
+            for component in components
+            if reference_treatment in component
+        )
+        disconnected = tuple(
+            component
+            for component in components
+            if reference_treatment not in component
+        )
+        disconnected_text = "; ".join(", ".join(component) for component in disconnected)
+        raise ValidationError(
+            f"Outcome '{outcome_id}' has a disconnected treatment network for "
+            f"reference_treatment '{reference_treatment}'. Reference component: "
+            f"{', '.join(reference_component)}. Disconnected components: {disconnected_text}."
+        )
 
     @staticmethod
     def _assemble_design(

@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import pytest
+
 from nma_pool.data.builder import DatasetBuilder
+from nma_pool.data.schemas import ValidationError
 from nma_pool.models.ml_nmr import MLNMRPooler
 from nma_pool.models.spec import MLNMRSpec
 from tests.fixtures.mlnmr_payload import build_mlnmr_payload
@@ -117,3 +120,41 @@ def test_mlnmr_counts_only_ipd_rows_that_reach_the_fitted_design() -> None:
         ),
     )
     assert fit.n_ipd_rows == 8
+
+
+def test_mlnmr_rejects_disconnected_network() -> None:
+    payload = {
+        "studies": [
+            {"study_id": "AD1", "design": "rct", "year": 2024, "source_id": "ad1", "rob_domain_summary": "low"},
+            {"study_id": "AD2", "design": "rct", "year": 2024, "source_id": "ad2", "rob_domain_summary": "low"},
+        ],
+        "arms": [
+            {"study_id": "AD1", "arm_id": "A1", "treatment_id": "A", "n": 120},
+            {"study_id": "AD1", "arm_id": "A2", "treatment_id": "B", "n": 120},
+            {"study_id": "AD2", "arm_id": "C1", "treatment_id": "C", "n": 120},
+            {"study_id": "AD2", "arm_id": "C2", "treatment_id": "D", "n": 120},
+        ],
+        "outcomes_ad": [
+            {"study_id": "AD1", "arm_id": "A1", "outcome_id": "efficacy", "measure_type": "continuous", "value": 0.0, "se": 0.12},
+            {"study_id": "AD1", "arm_id": "A2", "outcome_id": "efficacy", "measure_type": "continuous", "value": 1.0, "se": 0.12},
+            {"study_id": "AD2", "arm_id": "C1", "outcome_id": "efficacy", "measure_type": "continuous", "value": 2.0, "se": 0.12},
+            {"study_id": "AD2", "arm_id": "C2", "outcome_id": "efficacy", "measure_type": "continuous", "value": 3.0, "se": 0.12},
+        ],
+        "ad_covariates": [
+            {"study_id": "AD1", "arm_id": "A1", "covariate_name": "x", "mean": 0.0, "sd": 1.0, "n": 120},
+            {"study_id": "AD1", "arm_id": "A2", "covariate_name": "x", "mean": 0.1, "sd": 1.0, "n": 120},
+            {"study_id": "AD2", "arm_id": "C1", "covariate_name": "x", "mean": 0.2, "sd": 1.0, "n": 120},
+            {"study_id": "AD2", "arm_id": "C2", "covariate_name": "x", "mean": 0.3, "sd": 1.0, "n": 120},
+        ],
+    }
+
+    with pytest.raises(ValidationError, match="disconnected treatment network"):
+        MLNMRPooler().fit(
+            DatasetBuilder().from_payload(payload),
+            MLNMRSpec(
+                outcome_id="efficacy",
+                reference_treatment="A",
+                covariate_name="x",
+                integration_mode="empirical",
+            ),
+        )

@@ -1,0 +1,2 @@
+# Reviewer install for local reruns of the packaged workflows and tests.
+-e .[dev,stan]

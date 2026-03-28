@@ -29,6 +29,8 @@ def build_model_card(
             "study_count": diagnostics.study_count,
             "treatment_count": diagnostics.treatment_count,
             "contrast_count": diagnostics.contrast_count,
+            "is_connected": diagnostics.is_connected,
+            "connected_components": [list(component) for component in diagnostics.connected_components],
         },
         "fit": {
             "tau": fit.tau,
