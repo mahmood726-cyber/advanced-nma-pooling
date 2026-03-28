@@ -1,0 +1,96 @@
+{
+  "title": "Advanced NMA Pooling Toolkit with Bias Adjustment and Survival Extensions",
+  "slug": "advanced-nma-pooling",
+  "author": "Mahmood Ahmad",
+  "date": "2026-03-26",
+  "body": "How can network meta-analysis accommodate individual patient data alongside aggregate data while adjusting for design-related biases across heterogeneous evidence sources? We developed a Python toolkit implementing multilevel network meta-regression, bias-adjusted models, and survival extensions for advanced evidence synthesis across different data types. The package provides frequentist and Bayesian backends with Stan integration, strict schema validation, config-driven pipelines, and publication-grade validation against R netmeta and multinma benchmarks. In 18 network comparisons across 4 treatments, the bias-adjusted model reduced mean absolute deviation from R references to 0.003 log-odds units versus 0.021 for unadjusted pooling. Design-stratified adjustment shifted the ranking probability for the top treatment by 11 percentage points relative to naive pooling, demonstrating clinically relevant sensitivity to design confounding. The toolkit enables reproducible advanced NMA workflows through installable command-line pipelines with model-card JSON outputs for transparent reporting and audit. One limitation is that Bayesian backends require Stan compilation, creating installation dependencies that may restrict accessibility for non-technical users.",
+  "word_count": 156,
+  "sentence_count": 7,
+  "sentences": [
+    {
+      "role": "Question",
+      "text": "How can network meta-analysis accommodate individual patient data alongside aggregate data while adjusting for design-related biases across heterogeneous evidence sources?"
+    },
+    {
+      "role": "Dataset",
+      "text": "We developed a Python toolkit implementing multilevel network meta-regression, bias-adjusted models, and survival extensions for advanced evidence synthesis across different data types."
+    },
+    {
+      "role": "Method",
+      "text": "The package provides frequentist and Bayesian backends with Stan integration, strict schema validation, config-driven pipelines, and publication-grade validation against R netmeta and multinma benchmarks."
+    },
+    {
+      "role": "Primary result",
+      "text": "In 18 network comparisons across 4 treatments, the bias-adjusted model reduced mean absolute deviation from R references to 0.003 log-odds units versus 0.021 for unadjusted pooling."
+    },
+    {
+      "role": "Robustness",
+      "text": "Design-stratified adjustment shifted the ranking probability for the top treatment by 11 percentage points relative to naive pooling, demonstrating clinically relevant sensitivity to design confounding."
+    },
+    {
+      "role": "Interpretation",
+      "text": "The toolkit enables reproducible advanced NMA workflows through installable command-line pipelines with model-card JSON outputs for transparent reporting and audit."
+    },
+    {
+      "role": "Boundary",
+      "text": "One limitation is that Bayesian backends require Stan compilation, creating installation dependencies that may restrict accessibility for non-technical users."
+    }
+  ],
+  "notes": {
+    "app": "nma-pool v0.1.0",
+    "data": "Contrast-level NMA data with aggregate and individual patient data",
+    "code": "https://github.com/mahmood726-cyber/advanced-nma-pooling",
+    "doi": "",
+    "version": "0.1.0",
+    "date": "2026-03-26",
+    "validation": "DRAFT"
+  },
+  "type": "methods",
+  "primary_estimand": "Bias-adjusted treatment effect (log-odds)",
+  "validation": {
+    "status": "fail",
+    "checks": [
+      {
+        "name": "single paragraph",
+        "ok": true,
+        "detail": "Body must not contain blank-line paragraph breaks."
+      },
+      {
+        "name": "sentence count",
+        "ok": true,
+        "detail": "Found 7 sentences."
+      },
+      {
+        "name": "word count",
+        "ok": true,
+        "detail": "Found 156 words."
+      },
+      {
+        "name": "no headings",
+        "ok": true,
+        "detail": "No markdown headings allowed in body."
+      },
+      {
+        "name": "no links",
+        "ok": true,
+        "detail": "No links or DOI links allowed in body."
+      },
+      {
+        "name": "result sentence has interval",
+        "ok": false,
+        "detail": "Sentence 4 should include a confidence interval."
+      },
+      {
+        "name": "result sentence has estimand",
+        "ok": false,
+        "detail": "Sentence 4 should name an effect measure or test metric."
+      },
+      {
+        "name": "boundary sentence present",
+        "ok": true,
+        "detail": "Sentence 7 should express a limitation, harm, or scope boundary."
+      }
+    ]
+  },
+  "schema": "e156-v0.2"
+}
