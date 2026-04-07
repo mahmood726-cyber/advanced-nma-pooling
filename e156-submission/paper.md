@@ -1,6 +1,6 @@
 Mahmood Ahmad
 Tahir Heart Institute
-author@example.com
+mahmood.ahmad2@nhs.net
 
 Advanced NMA Pooling Toolkit with Bias Adjustment and Survival Extensions
 
