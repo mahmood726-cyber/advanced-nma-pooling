@@ -3,7 +3,7 @@
   "slug": "advanced-nma-pooling",
   "author": "Mahmood Ahmad",
   "date": "2026-03-26",
-  "path": "C:\\Models\\advanced-nma-pooling",
+  "path": "C:\\Projects\\advanced-nma-pooling",
   "type": "methods",
   "primary_estimand": "Bias-adjusted treatment effect (log-odds)",
   "summary": "A Python toolkit for advanced network meta-analysis with multilevel meta-regression, bias adjustment, and survival extensions validated against R benchmarks.",
