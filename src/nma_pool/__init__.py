@@ -1,4 +1,4 @@
-﻿"""nma_pool package."""
+"""nma_pool package."""
 
 from importlib.metadata import PackageNotFoundError, version
 

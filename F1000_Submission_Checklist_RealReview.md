@@ -1,8 +1,8 @@
 # F1000 Submission Checklist (Real-Review Aligned)
 
 Updated: 2026-03-15
-Real review source: `C:\Users\user\OneDrive - NHS\Desktop\reviewer Report.txt`
-Package: `C:\Models\advanced-nma-pooling`
+Real review source: `<user-OneDrive>/Desktop/reviewer Report.txt` (local-only)
+Package: `advanced-nma-pooling` (this repo)
 
 ## Core gates derived from recurring real peer-review concerns
 - [x] Full manuscript structure with non-skeleton Abstract, Methods, Results, Discussion, Software availability, and Declarations.

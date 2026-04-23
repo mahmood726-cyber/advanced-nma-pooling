@@ -1,4 +1,4 @@
-﻿"""Bayesian design-stratified bias-adjusted NMA with analytic/Stan backends."""
+"""Bayesian design-stratified bias-adjusted NMA with analytic/Stan backends."""
 
 from __future__ import annotations
 

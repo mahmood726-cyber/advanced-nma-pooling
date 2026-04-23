@@ -2,7 +2,7 @@
 
 Review date: 2026-03-15  
 Review model: internal 3-persona rubric (Methods, Reproducibility, Editorial)  
-Calibration source: `C:\Users\user\OneDrive - NHS\Desktop\reviewer Report.txt`
+Calibration source: `<user-OneDrive>/Desktop/reviewer Report.txt` (local-only)
 
 ## Overall decision
 

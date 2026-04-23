@@ -1,4 +1,4 @@
-﻿"""Install-safe accessors for packaged model resources."""
+"""Install-safe accessors for packaged model resources."""
 
 from __future__ import annotations
 

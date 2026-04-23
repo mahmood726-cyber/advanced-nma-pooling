@@ -1,4 +1,4 @@
-﻿"""Bayesian ML-NMR for continuous outcomes with analytic and Stan backends."""
+"""Bayesian ML-NMR for continuous outcomes with analytic and Stan backends."""
 
 from __future__ import annotations
 
