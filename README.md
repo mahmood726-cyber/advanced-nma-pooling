@@ -48,7 +48,7 @@ python -m pip install -e ".[dev,stan]"
 Build and validate release artifacts locally:
 
 ```bash
-python -m build
+python scripts/build_release_artifacts.py --outdir dist
 python -m twine check dist/*
 ```
 

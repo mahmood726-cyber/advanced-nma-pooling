@@ -10,9 +10,7 @@ def test_built_wheel_contains_cli_entrypoint_and_stan_assets(tmp_path: Path) -> 
     proc = subprocess.run(
         [
             sys.executable,
-            "-m",
-            "build",
-            "--no-isolation",
+            "scripts/build_release_artifacts.py",
             "--outdir",
             str(tmp_path),
         ],

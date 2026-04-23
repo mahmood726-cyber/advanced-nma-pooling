@@ -16,7 +16,7 @@ Example commands:
 
 ```bash
 pytest -q
-python -m build --no-isolation
+python scripts/build_release_artifacts.py --outdir dist
 python -m twine check dist/*
 python scripts/release_manifest.py --dist-dir dist --output-dir dist --version 0.1.1
 git add .

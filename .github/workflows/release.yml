@@ -72,7 +72,7 @@ jobs:
 
       - name: Build release artifacts
         run: |
-          python -m build --no-isolation
+          python scripts/build_release_artifacts.py --outdir dist
 
       - name: Validate distribution metadata
         run: |
